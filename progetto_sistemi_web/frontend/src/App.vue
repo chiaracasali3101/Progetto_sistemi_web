@@ -1,46 +1,117 @@
 <template>
-  <header>
-    <h1>Blog di Tecnologie Web</h1>
-  </header>
-  <nav>
+  <button class="hamburger-btn" @click="toggleMenu" :aria-expanded="isMenuOpen">
+    <span class="line" :class="{ open: isMenuOpen }"></span>
+    <span class="line" :class="{ open: isMenuOpen }"></span>
+    <span class="line" :class="{ open: isMenuOpen }"></span>
+  </button>
+  
+  <nav :class="{ 'menu-open': isMenuOpen }">
     <ul>
-      <li><router-link to="/">Home</router-link></li>
-      <li><router-link to="/archivio">Archivio</router-link></li>
-      <li><router-link to="/contatti">Contatti</router-link></li>
-      <li><router-link to="/login">Login</router-link></li>
+      <li><router-link to="/" @click="closeMenu">Home</router-link></li>
+      <li><router-link to="/hotel" @click="closeMenu">Hotel</router-link></li>
+      <li><router-link to="/spiaggia" @click="closeMenu">Spiaggia</router-link></li>
+      <li><router-link to="/ristorante" @click="closeMenu">Ristorante</router-link></li>
+      <li><router-link to="/login" @click="closeMenu">Login</router-link></li>
+      <li><router-link to="/prenotazioni" @click="closeMenu">Le mie Prenotazioni</router-link></li>
     </ul>
   </nav>
-  <main>
-    <router-view />
-  </main>
-  <aside>
-    <section>
-      <h2>Post Popolari</h2>
-      <ul>
-        <li><a href="#">Intro alle Tecnologie Web Client Side</a></li>
-        <li><a href="#">Intro alle Tecnologie Web Server Side</a></li>
-      </ul>
-    </section>
-    <section>
-      <h2>Categorie</h2>
-      <ul>
-        <li><a href="#">HTML</a></li>
-        <li><a href="#">CSS</a></li>
-        <li><a href="#">PHP</a></li>
-        <li><a href="#">Javascript</a></li>
-        <li><a href="#">jQuery</a></li>
-        <li><a href="#">Apache</a></li>
-      </ul>
-    </section>
-  </aside>
-  <footer>
-    <p>Fondamenti di Sistemi Web - A.A. 2021/2022</p>
-  </footer>
 </template>
 
-<style scoped>
-.router-link-exact-active {
-  color: rgb(219, 69, 83);
-  background-color: white;
+<script setup lang="ts">
+// Composizione API e TypeScript
+import { ref } from 'vue';
+
+const isMenuOpen = ref(false);
+
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value;
+  // Blocca lo scroll del body quando il menù a tutto schermo è aperto
+  document.body.style.overflow = isMenuOpen.value ? 'hidden' : 'auto';
+};
+
+const closeMenu = () => {
+  isMenuOpen.value = false;
+  document.body.style.overflow = 'auto';
+};
+</script>
+
+<style lang="scss" scoped>
+// Usa SCSS per una facile organizzazione degli stili (come suggerito nelle tue slide)
+
+// ------------------------------------
+// ⚠️ IMPORTANTE: Media Queries (Visibilità)
+// Il menù è visibile solo su schermi piccoli (mobile)
+// ------------------------------------
+nav, .hamburger-btn {
+  // Nasconde il menù hamburger su schermi grandi
+  display: none; 
+}
+
+@media (max-width: 768px) {
+  /* Mostra il menù hamburger solo su schermi piccoli */
+  .hamburger-btn {
+    display: block; 
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    z-index: 1001; // Deve essere in primo piano
+  }
+
+  .line {
+    display: block;
+    width: 100%;
+    height: 4px;
+    margin: 6px 0;
+    background-color: #333;
+    transition: transform 0.3s, opacity 0.3s;
+    
+    // Transizione per la 'X'
+    &.open:nth-child(1) { transform: translateY(10px) rotate(45deg); }
+    &.open:nth-child(2) { opacity: 0; }
+    &.open:nth-child(3) { transform: translateY(-10px) rotate(-45deg); }
+  }
+  
+  /* Stile di base per il menù a scomparsa */
+  nav {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 80%;
+    max-width: 300px;
+    height: 100%;
+    background-color: white;
+    padding-top: 80px;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+    
+    // Lo nasconde fuori dallo schermo
+    transform: translateX(300px); 
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+  }
+  
+  /* Stato APERTO: sposta il menù nello schermo */
+  .menu-open {
+    transform: translateX(0);
+  }
+
+  nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  nav a {
+    display: block;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: #333;
+    border-bottom: 1px solid #eee;
+  }
 }
 </style>
