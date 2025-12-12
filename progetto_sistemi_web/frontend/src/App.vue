@@ -16,6 +16,7 @@
           <li><router-link to="/ristorante" @click="closeMenu">Ristorante</router-link></li>
           <li><router-link to="/login" @click="closeMenu">Login</router-link></li>
           <li><router-link to="/prenotazioni" @click="closeMenu">Le mie Prenotazioni</router-link></li>
+          <li><router-link to="/contatti" @click="closeMenu">Contattaci</router-link></li>
         </ul>
       </nav>
     </header>

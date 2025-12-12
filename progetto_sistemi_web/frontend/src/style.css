@@ -2,289 +2,289 @@
     Reset Base & Stili Generali
     ------------------------------------ */
     body {
-        /* Base Font */
-        font-family: Verdana, sans-serif;
-        line-height: 1.6;
-        background-color: #ffffff;
-        color: #1b1d1d;
-    }
+      /* Base Font */
+      font-family: Verdana, sans-serif;
+      line-height: 1.6;
+      background-color: #ffffff;
+      color: #1b1d1d;
+  }
+  
+  h1{
+      color: #141515; 
+      margin-bottom: 0.8em;
+  }
+  h2, h3, h4, h5, h6 {
+      color: #166088; 
+      margin-bottom: 0.8em;
+  }
+  a {
+      color: #4a6fa5; 
+      text-decoration: none;
+  }
+  a:hover {
+      color: #166088;
+      text-decoration: underline;
+  }
+  
+  /* ------------------------------------
+     Variabili CSS Native (Per Hamburger Menu e Stili Globali)
+     ------------------------------------ */
+  :root {
+    --mobile-breakpoint: 768px;
+    --primary-color: #333; /* Colore scuro per le linee */
+    --header-bg: #0f739d;
+    --header-border: #4a6fa5;
+    --transition-speed: 0.3s;
+  }
+  
+  /* ------------------------------------
+     Layout Base dell'Applicazione (Da App.vue)
+     ------------------------------------ */
+  #app-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  main.content-area {
+    flex-grow: 1; /* Assicura che il contenuto principale spinga il footer in fondo */
+    padding: 20px;
+  }
+  
+  
+  /* ------------------------------------
+     HEADER & NAVIGAZIONE (Bootstrap & App.vue)
+     ------------------------------------ */
+  header.main-header {
+      background-color: var(--header-bg); 
+      color: #dbe9ee; 
+      text-align: center;
+      border-bottom: 4px solid var(--header-border);
+      width: 100%;
+  }
+  
+  /* Stili del Footer */
+  footer {
+      /* Mantengo la tua definizione originale del footer */
+      background-color: #166088; 
+      color: #dbe9ee; /* Ho corretto il colore del testo che era nero (0f0f0f) su sfondo scuro */
+      text-align: center;
+      padding: 20px 0;
+      font-size: 0.9em;
+      margin-top: 0; /* Rimosso margin-top: auto; perché 'main' gestisce flex-grow: 1 */
+      margin-bottom: 0; /* Rimosso margin-bottom: auto; */
+  }
+  
+  
+  /* --- Bootstrap Navbar Customization --- */
+  #main-navbar .navbar-nav .nav-link {
+      color: #ffffff;
+      font-weight: bold;
+      padding-left: 1rem;
+      padding-right: 1rem;
+  }
+  
+  #main-navbar .navbar-nav .nav-link:hover,
+  #main-navbar .navbar-nav .nav-link.active {
+      color: #ffffff;
+      background-color: rgba(74, 111, 165, 0.5);
+      border-radius: 4px;
+  }
+  
+  #main-navbar .navbar-brand {
+       color: #dbe9ee;
+       font-size: 1.5rem;
+       font-weight: bold;
+  }
+  #main-navbar .navbar-brand:hover {
+       color: #ffffff;
+  }
+  
+  /* ------------------------------------
+     HAMBURGER MENU (Logica Responsive da App.vue)
+     ------------------------------------ */
+  
+  /* 1. Stili Desktop (Nascondi Hamburger Menu e mostra Nav orizzontale) */
+  .main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex; /* Mostra i link in orizzontale */
+    margin: 0;
+    padding: 0;
+  }
+  nav li {
+    margin-left: 20px;
+  }
+  /* Nascondi il pulsante hamburger di default */
+  .hamburger-btn {
+    display: none; 
+  }
+  
+  
+  /* ------------------------------------
+     STILI MOBILE (Media Query <= 768px)
+     ------------------------------------ */
+  @media (max-width: 768px) {
     
-    h1{
-        color: #141515; 
-        margin-bottom: 0.8em;
-    }
-    h2, h3, h4, h5, h6 {
-        color: #166088; 
-        margin-bottom: 0.8em;
-    }
-    a {
-        color: #4a6fa5; 
-        text-decoration: none;
-    }
-    a:hover {
-        color: #166088;
-        text-decoration: underline;
-    }
-    
-    /* ------------------------------------
-       Variabili CSS Native (Per Hamburger Menu e Stili Globali)
-       ------------------------------------ */
-    :root {
-      --mobile-breakpoint: 768px;
-      --primary-color: #333; /* Colore scuro per le linee */
-      --header-bg: #0f739d;
-      --header-border: #4a6fa5;
-      --transition-speed: 0.3s;
-    }
-    
-    /* ------------------------------------
-       Layout Base dell'Applicazione (Da App.vue)
-       ------------------------------------ */
-    #app-wrapper {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    main.content-area {
-      flex-grow: 1; /* Assicura che il contenuto principale spinga il footer in fondo */
-      padding: 20px;
-    }
-    
-    
-    /* ------------------------------------
-       HEADER & NAVIGAZIONE (Bootstrap & App.vue)
-       ------------------------------------ */
-    header.main-header {
-        background-color: var(--header-bg); 
-        color: #dbe9ee; 
-        text-align: center;
-        border-bottom: 4px solid var(--header-border);
-        width: 100%;
-    }
-    
-    /* Stili del Footer */
-    footer {
-        /* Mantengo la tua definizione originale del footer */
-        background-color: #166088; 
-        color: #dbe9ee; /* Ho corretto il colore del testo che era nero (0f0f0f) su sfondo scuro */
-        text-align: center;
-        padding: 20px 0;
-        font-size: 0.9em;
-        margin-top: 0; /* Rimosso margin-top: auto; perché 'main' gestisce flex-grow: 1 */
-        margin-bottom: 0; /* Rimosso margin-bottom: auto; */
-    }
-    
-    
-    /* --- Bootstrap Navbar Customization --- */
-    #main-navbar .navbar-nav .nav-link {
-        color: #ffffff;
-        font-weight: bold;
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-    
-    #main-navbar .navbar-nav .nav-link:hover,
-    #main-navbar .navbar-nav .nav-link.active {
-        color: #ffffff;
-        background-color: rgba(74, 111, 165, 0.5);
-        border-radius: 4px;
-    }
-    
-    #main-navbar .navbar-brand {
-         color: #dbe9ee;
-         font-size: 1.5rem;
-         font-weight: bold;
-    }
-    #main-navbar .navbar-brand:hover {
-         color: #ffffff;
-    }
-    
-    /* ------------------------------------
-       HAMBURGER MENU (Logica Responsive da App.vue)
-       ------------------------------------ */
-    
-    /* 1. Stili Desktop (Nascondi Hamburger Menu e mostra Nav orizzontale) */
+    /* 1. Pulizia della navbar orizzontale su mobile */
     .main-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 30px;
+        justify-content: flex-start;
+        padding: 0;
     }
     
+    /* 2. Pannello di Navigazione Mobile (Scompare/Appare) */
+    nav {
+      display: block; 
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 80%;
+      max-width: 300px;
+      height: 100%;
+      background-color: white;
+      padding-top: 80px;
+      box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+      
+      /* Stato INIZIALE: Nascosto fuori dallo schermo */
+      transform: translateX(300px); 
+      transition: transform var(--transition-speed) ease-in-out;
+      z-index: 1000;
+    }
+    
+    /* Stato APERTO: Torna a 0 */
+    nav.menu-open {
+      transform: translateX(0);
+    }
+  
     nav ul {
-      list-style: none;
-      display: flex; /* Mostra i link in orizzontale */
-      margin: 0;
-      padding: 0;
+      flex-direction: column; /* Impila i link in verticale */
     }
     nav li {
-      margin-left: 20px;
+      margin-left: 0;
+      border-bottom: 1px solid #eee;
     }
-    /* Nascondi il pulsante hamburger di default */
+    nav a {
+      padding: 15px 20px;
+    }
+  
+    /* 3. Bottone Hamburger (Mostrato solo su Mobile) */
     .hamburger-btn {
-      display: none; 
+      display: block; 
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 1001; 
+    }
+  
+    .line {
+      display: block;
+      width: 100%;
+      height: 4px;
+      margin: 6px 0;
+      background-color: var(--primary-color);
+      transition: transform var(--transition-speed), opacity var(--transition-speed);
     }
     
-    
-    /* ------------------------------------
-       STILI MOBILE (Media Query <= 768px)
-       ------------------------------------ */
-    @media (max-width: 768px) {
-      
-      /* 1. Pulizia della navbar orizzontale su mobile */
-      .main-header {
-          justify-content: flex-start;
-          padding: 0;
-      }
-      
-      /* 2. Pannello di Navigazione Mobile (Scompare/Appare) */
-      nav {
-        display: block; 
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 80%;
-        max-width: 300px;
-        height: 100%;
-        background-color: white;
-        padding-top: 80px;
-        box-shadow: -2px 0 5px rgba(0,0,0,0.2);
-        
-        /* Stato INIZIALE: Nascosto fuori dallo schermo */
-        transform: translateX(300px); 
-        transition: transform var(--transition-speed) ease-in-out;
-        z-index: 1000;
-      }
-      
-      /* Stato APERTO: Torna a 0 */
-      nav.menu-open {
-        transform: translateX(0);
-      }
-    
-      nav ul {
-        flex-direction: column; /* Impila i link in verticale */
-      }
-      nav li {
-        margin-left: 0;
-        border-bottom: 1px solid #eee;
-      }
-      nav a {
-        padding: 15px 20px;
-      }
-    
-      /* 3. Bottone Hamburger (Mostrato solo su Mobile) */
-      .hamburger-btn {
-        display: block; 
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        width: 40px;
-        height: 40px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        z-index: 1001; 
-      }
-    
-      .line {
-        display: block;
-        width: 100%;
-        height: 4px;
-        margin: 6px 0;
-        background-color: var(--primary-color);
-        transition: transform var(--transition-speed), opacity var(--transition-speed);
-      }
-      
-      /* Animazione 'X': I selettori per le classi open */
-      .line.open:nth-child(1) { 
-        transform: translateY(10px) rotate(45deg); 
-      }
-      .line.open:nth-child(2) { 
-        opacity: 0; 
-      }
-      .line.open:nth-child(3) { 
-        transform: translateY(-10px) rotate(-45deg); 
-      }
+    /* Animazione 'X': I selettori per le classi open */
+    .line.open:nth-child(1) { 
+      transform: translateY(10px) rotate(45deg); 
     }
-    
-    /* ------------------------------------
-       Sezione Login & Contatti Form
-       ------------------------------------ */
-    #login-section, #contatti-section {
-        background-color: #dbe9ee;
-        padding: 30px;
-        margin-top: 40px;
-        border-radius: 8px;
-        border: 1px solid #c0d6df;
-        max-width: 500px;
-        margin-left: auto;
-        margin-right: auto;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    .line.open:nth-child(2) { 
+      opacity: 0; 
     }
-    
-    .form-label {
-        color: #166088;
-        font-weight: bold;
-        margin-bottom: 0.3rem;
+    .line.open:nth-child(3) { 
+      transform: translateY(-10px) rotate(-45deg); 
     }
-    
-    .form-control {
-        border: 1px solid #c0d6df;
-        font-size: 1em;
-    }
-    .form-control:focus {
-        border-color: #4a6fa5;
-        box-shadow: 0 0 0 0.25rem rgba(74, 111, 165, 0.25);
-    }
-    
-    .btn-custom {
-        background-color: #0d6efd;
-        color: white;
-        border: none;
-        padding: 12px 25px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-    
-    .btn-custom:hover {
-        background-color: #0b5ed7;
-    }
-    
-    .attivo {
-        color: #0d6efd;
-        background-color: #166088;
-        padding: 5px;
-        border-radius: 4px;
-    }
-    
-    /* ------------------------------------
-       Tabella 
-       ------------------------------------ */
-    table {
-        width: 80%;
-        margin: 20px auto;
-        border-collapse: collapse;
-        font-family: Arial, sans-serif;
-    }
-    th, td {
-        border: 1px solid #c0d6df;
-        padding: 8px;
-        text-align: left;
-    }
-    th {
-        background-color: #dbe9ee;
-        color: #166088;
-    }
-    tr:nth-child(even) {
-        background-color: #f0f7fa;
-    }
-    tr:hover {
-        background-color: #e1edf2;
-    }
-    caption {
-        font-weight: bold;
-        margin-bottom: 10px;
-        color: #166088;
-    }
+  }
+  
+  /* ------------------------------------
+     Sezione Login & Contatti Form
+     ------------------------------------ */
+  #login-section, #contatti-section {
+      background-color: #dbe9ee;
+      padding: 30px;
+      margin-top: 40px;
+      border-radius: 8px;
+      border: 1px solid #c0d6df;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-label {
+      color: #166088;
+      font-weight: bold;
+      margin-bottom: 0.3rem;
+  }
+  
+  .form-control {
+      border: 1px solid #c0d6df;
+      font-size: 1em;
+  }
+  .form-control:focus {
+      border-color: #4a6fa5;
+      box-shadow: 0 0 0 0.25rem rgba(74, 111, 165, 0.25);
+  }
+  
+  .btn-custom {
+      background-color: #0d6efd;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  }
+  
+  .btn-custom:hover {
+      background-color: #0b5ed7;
+  }
+  
+  .attivo {
+      color: #0d6efd;
+      background-color: #166088;
+      padding: 5px;
+      border-radius: 4px;
+  }
+  
+  /* ------------------------------------
+     Tabella 
+     ------------------------------------ */
+  table {
+      width: 80%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      font-family: Arial, sans-serif;
+  }
+  th, td {
+      border: 1px solid #c0d6df;
+      padding: 8px;
+      text-align: left;
+  }
+  th {
+      background-color: #dbe9ee;
+      color: #166088;
+  }
+  tr:nth-child(even) {
+      background-color: #f0f7fa;
+  }
+  tr:hover {
+      background-color: #e1edf2;
+  }
+  caption {
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #166088;
+  }
