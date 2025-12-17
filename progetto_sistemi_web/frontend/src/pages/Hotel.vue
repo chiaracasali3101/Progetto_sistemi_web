@@ -1,56 +1,71 @@
 <script lang="ts">
     import { defineComponent } from "vue";
     import axios from "axios";
-    // Si assume che DettagliCamera sia il tipo corretto per i dati ricevuti
+    // Importiamo il tipo per la lista (assicurati che DettagliCamera sia esportato in types.ts)
     import { DettagliCamera } from "../types"; 
     
     export default defineComponent({
         data() {
             return {
-                // Definiamo 'camera' come lo stato che conterrà i dati singoli.
-                // Questo risolve l'errore se la riga 15 faceva riferimento a 'this.camera'.
-                camera: null as DettagliCamera | null
+                // Stato per contenere l'array di tutte le camere recuperate dal DB
+                camere: [] as DettagliCamera[]
             }
         },
         methods: {
-            getCamera() {
-                // Usa l'ID dalla rotta dinamica
-                const id = this.$route.params.idCamera; 
-                
-                // Chiamata API per recuperare i dettagli di UNA singola camera
-                axios.get("/api/camera/" + id)
-                    // Assegnazione della risposta alla variabile di stato 'camera'
+            // Funzione per recuperare la lista completa delle camere
+            getCamere() {
+                // Chiamata API al backend (assicurati che la rotta /api/camere esista)
+                axios.get("/api/camere")
                     .then(response => {
-                        // Usiamo [0] perché a volte l'API restituisce un array di un elemento
-                        this.camera = response.data[0]; 
+                        // Salviamo l'array di camere nello stato
+                        this.camere = response.data; 
                     })
-                    // Gestione errori, fondamentale per il debug
                     .catch(error => {
-                         console.error("Errore nel caricamento della camera:", error);
+                         console.error("Errore nel caricamento della lista camere:", error);
                     });
             }
         },
         mounted() {
-            // Avvia la funzione di caricamento dati quando il componente è pronto
-            this.getCamera();
+            // Avviamo il caricamento quando entriamo nella pagina
+            this.getCamere();
         }
     })
-</script>
+    </script>
+        
+    <template>
+      <section class="hotel-page">
+        <h1>Le Nostre Camere</h1>
+        <p>Scopri la tradizione e l'eleganza delle nostre soluzioni di soggiorno.</p>
     
-<template>
-    <article v-if="camera" class="dettaglio-camera">
-      
-      <img :src="'/img/' + camera.imgcamera" :alt="camera.nomecamera" />
-      
-      <h3>{{ camera.nomecamera }}</h3>
-      
-      <p>Descrizione completa: {{ camera.descrizionecamera }}</p>
-      
-      <p>Prezzo: {{ camera.prezzocamera }} €/notte</p>
-      
-      </article>
-
-    <div v-else>
-        Caricamento dei dettagli della camera...
-    </div>
-</template>
+        <div v-if="camere.length > 0" class="camere-container">
+          
+          <article v-for="camera in camere" :key="camera.idcamera" class="camera-card">
+            
+            <img :src="'/img/' + camera.imgcamera" :alt="camera.nomecamera" class="camera-img" />
+            
+            <div class="camera-info">
+              <h3>{{ camera.nomecamera }}</h3>
+              <p>{{ camera.descrizionecamera }}</p>
+              <p class="price">Prezzo: <strong>{{ camera.prezzocamera }} €</strong> / notte</p>
+              
+              <router-link :to="'/prenota/' + camera.idcamera" class="btn-dettagli">
+                Scegli questa camera
+              </router-link>
+            </div>
+    
+          </article>
+    
+        </div>
+    
+        <div v-else class="loading-status">
+            Caricamento delle camere in corso...
+        </div>
+      </section>
+    </template>
+    
+    <style scoped>
+    /* Il CSS è rimosso come richiesto. 
+       Ricordati di definire .camere-container (flex o grid) e .camera-card 
+       nel tuo file style.css per rendere la pagina ordinata. 
+    */
+    </style>

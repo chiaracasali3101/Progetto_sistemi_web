@@ -19,7 +19,7 @@
           <li><router-link to="/hotel" @click="closeMenu">Hotel</router-link></li>
           <li><router-link to="/spiaggia" @click="closeMenu">Spiaggia</router-link></li>
           <li><router-link to="/ristorante" @click="closeMenu">Ristorante</router-link></li>
-          <li><router-link to="/login" @click="closeMenu">Login</router-link></li>
+          <li><router-link to="/scelta-accesso">Login</router-link></li>
           <li><router-link to="/prenotazioni" @click="closeMenu">Le mie Prenotazioni</router-link></li>
           <li><router-link to="/contatti" @click="closeMenu">Contattaci</router-link></li>
         </ul>

@@ -371,3 +371,22 @@ nav.menu-open ul li a.router-link-active {
       opacity: 0.8;
   }
 }
+
+.login-form ul {
+  list-style-type: none; /* Rimuove i pallini neri */
+  padding: 0;
+}
+
+.login-form li {
+  margin-bottom: 15px; /* Spazia i campi del form */
+}
+
+.btn-invia {
+  padding: 10px 20px;
+  background-color: #0f739d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
