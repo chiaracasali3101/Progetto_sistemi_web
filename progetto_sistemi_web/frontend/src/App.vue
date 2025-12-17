@@ -2,6 +2,11 @@
   <div id="app-wrapper">
     
     <header class="main-header">
+      <div class="header-brand">
+        <h1>Grand Hotel Mattei</h1>
+        <img src="./immagini/hotel.png" alt="Immagine Hotel Mattei" class="nav-logo">
+      </div>
+    
       <button class="hamburger-btn" @click="toggleMenu" :aria-expanded="isMenuOpen">
         <span class="line" :class="{ open: isMenuOpen }"></span>
         <span class="line" :class="{ open: isMenuOpen }"></span>
@@ -27,8 +32,11 @@
 
     <footer>
       <p>Viale Bologna 5, Ravenna</p>
-      <p>&copy; 2024 Hotel Vue App. Tutti i diritti riservati.</p>
+      <p class="mb-0">Contatti:</p>
+          <p class="mb-0">telefono: 0544 408783</p>
+          <p class="mb-0">mail: grandhotelmattei@gmail.com</p>
     </footer>
+    
 
   </div>
 </template>
@@ -52,8 +60,3 @@ const closeMenu = () => {
 };
 </script>
 
-<style>
-/* Questo blocco <style> è ora vuoto, poiché tutti gli stili (incluse le variabili CSS e le media query) 
-   sono stati spostati nel file globale importato in main.ts (style.css).
-*/
-</style>

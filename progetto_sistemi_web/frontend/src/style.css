@@ -288,3 +288,86 @@
       margin-bottom: 10px;
       color: #166088;
   }
+
+.hotel-presentation {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Contenitore principale della Navbar */
+.main-header {
+  display: flex;
+  flex-direction: column; /* Dispone gli elementi in verticale */
+  align-items: center;    /* Centra orizzontalmente */
+  justify-content: center;
+  padding: 20px 0;        /* Aggiunge spazio sopra e sotto */
+}
+
+/* Contenitore di Titolo + Immagine */
+.header-brand {
+  display: flex;
+  flex-direction: column; /* Mette l'immagine sotto il testo (o viceversa) */
+  align-items: center;    /* Centra entrambi */
+  gap: 15px;              /* Spazio tra testo e immagine */
+}
+
+/* Stile del Titolo */
+.header-brand h1 {
+  font-size: 3rem;        /* Font molto più grosso (regola a piacere) */
+  font-weight: bold;
+  margin: 0;
+  color: var(--color-text-light); /* Assicurati che sia bianco su azzurro */
+  text-align: center;
+}
+
+/* Stile dell'Immagine */
+/* Stile dell'Immagine nell'Header */
+.nav-logo {
+  /* Aumenta questo valore per ingrandirla ulteriormente */
+  height: 250px;          /* Prima era 120px, ora è molto più grande */
+  width: auto;            /* Mantiene le proporzioni corrette */
+  
+  border-radius: 12px;    /* Arrotonda leggermente di più gli angoli per estetica */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Aggiunge un'ombra per farla risaltare */
+  object-fit: cover;
+  
+  transition: transform 0.3s ease; /* Effetto fluido se vuoi aggiungere interazioni */
+}
+
+/* Se vuoi che su schermi piccoli (mobile) non sia gigante, 
+ aggiungi questa regola per la responsività */
+@media (max-width: 768px) {
+  .nav-logo {
+      height: 150px;      /* Si rimpicciolisce automaticamente sui cellulari */
+  }
+}
+
+/* 1. LINK NELLA NAVBAR DESKTOP (Sempre bianchi) */
+.main-header nav ul li a {
+  color: #ffffff; 
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* 2. LINK NEL MENU HAMBURGER (Versione Mobile) */
+/* Quando il menu ha la classe .menu-open, cambiamo il colore dei link */
+nav.menu-open ul li a {
+  color: var(--color-primary); /* Usa l'azzurro scuro del tuo tema invece del bianco */
+  font-size: 1.2rem;          /* Magari un po' più grandi per il touch */
+}
+
+/* 3. COLORE LINK ATTIVO NEL MENU MOBILE */
+/* Per evidenziare in quale pagina si trova l'utente nel menu mobile */
+nav.menu-open ul li a.router-link-active {
+  color: #000000;             /* Nero o un colore contrastante per la pagina attiva */
+  font-weight: bold;
+}
+
+/* 4. HOVER (Solo per desktop) */
+@media (min-width: 769px) {
+  .main-header nav ul li a:hover {
+      color: #f0f0f0;
+      opacity: 0.8;
+  }
+}
