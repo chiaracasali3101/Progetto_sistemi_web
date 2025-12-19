@@ -8,11 +8,13 @@ import Hotel from "./pages/Hotel.vue";
 import Spiaggia from "./pages/Spiaggia.vue";
 import Ristorante from "./pages/Ristorante.vue";
 import Login from "./pages/Login.vue";
-import Prenotazioni from "./pages/Prenotazioni.vue";
+//import Prenotazioni from "./pages/Prenotazioni.vue";
 import Contatti from "./pages/Contatti.vue"; 
 import NotFound from "./pages/NotFound.vue"; 
-// AGGIUNTO: Importa il componente per la scelta (controlla il nome esatto del file)
 import SceltaAccesso from "./pages/SceltaAccesso.vue"; 
+
+// AGGIUNTO: Importa il nuovo componente dell'area riservata
+import AreaRiservata from "./pages/AreaRiservata.vue"; 
 
 const router: Router = createRouter({
   history: createWebHistory(),
@@ -21,17 +23,22 @@ const router: Router = createRouter({
     { path: "/hotel", component: Hotel },
     { path: "/spiaggia", component: Spiaggia },
     { path: "/ristorante", component: Ristorante },
-
-    // MODIFICATO: Rotta per la scelta tra Cliente e Staff
     { path: "/scelta-accesso", component: SceltaAccesso },
     
-    // MODIFICATO: Login ora accetta il parametro :tipo (cliente o dipendente)
+    // Login con parametro :tipo
     { path: "/login/:tipo", name: "login", component: Login, props: true },
-    
-    // Manteniamo anche il path /login base per sicurezza o reindirizzamento
     { path: "/login", redirect: "/scelta-accesso" },
 
-    { path: "/prenotazioni", component: Prenotazioni },
+    // AGGIUNTO: Rotta per l'Area Riservata dopo il login
+    // Usiamo :tipo per sapere se mostrare i tasti staff o quelli cliente
+    { 
+      path: "/area-riservata/:tipo", 
+      name: "AreaRiservata", 
+      component: AreaRiservata, 
+      props: true 
+    },
+
+    //{ path: "/prenotazioni", component: Prenotazioni },
     { path: "/contatti", component: Contatti },
     { path: "/:pathMatch(.*)*", component: NotFound },
   ]

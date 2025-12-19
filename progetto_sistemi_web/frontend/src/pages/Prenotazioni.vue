@@ -1,3 +1,3 @@
 <template>
-    <div class="prenotazioni"></div>
+    <div class="ristorante"></div>
 </template>

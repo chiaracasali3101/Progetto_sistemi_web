@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent } from "vue"
 import axios from "axios";
-// Rimosso l'import di axios se non lo usi ancora per evitare altri errori
+
 </script>
 
 <template>

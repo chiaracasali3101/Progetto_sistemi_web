@@ -3,7 +3,6 @@
   import axios from "axios";
   
   export default defineComponent({
-    // Riceviamo 'tipo' dal router (sarà 'cliente' o 'dipendente')
     props: {
       tipo: {
         type: String,
@@ -14,74 +13,59 @@
       return {
         username: "",
         password: "",
-        errore: "" // Per mostrare eventuali messaggi di errore
+        errore: ""
       }
     },
     methods: {
-      async gestisciLogin() {
-        try {
-          // Prepariamo i dati da inviare
-          const dati = {
-            username: this.username,
-            password: this.password,
-            ruolo: this.tipo // Passiamo il tipo al backend
-          };
-  
-          // Chiamata al backend (assicurati che l'URL sia corretto per il tuo server)
-          const response = await axios.post("/api/login", dati);
-  
-          if (response.data.success) {
-            // Se il login va a buon fine, reindirizziamo all'area riservata
-            this.$router.push("/area-riservata");
-          } else {
-            this.errore = "Credenziali non valide.";
-          }
-        } catch (err) {
-          console.error("Errore durante il login:", err);
-          this.errore = "Errore di connessione al server.";
-        }
-      }
+      // Dentro Login.vue
+async gestisciLogin() {
+  try {
+    const response = await axios.post("/api/login", {
+      username: this.username,
+      password: this.password,
+      ruolo: this.tipo // 'cliente' o 'dipendente'
+    });
+
+    if (response.data.success) {
+      // SALVIAMO I DATI NEL BROWSER
+      localStorage.setItem('utente_loggato', JSON.stringify(response.data.user));
+      localStorage.setItem('ruolo_utente', response.data.user.ruolo);
+      
+      // Ora cambiamo pagina
+      this.$router.push('/prenota'); 
+    } else {
+      alert("Credenziali errate!");
+    }
+  } catch (error) {
+    console.error("Errore login", error);
+  }
+}
     }
   });
-  </script>
-  
-  <template>
-    <div class="login-container">
-      <h1>Login {{ tipo === 'dipendente' ? 'Area Staff' : 'Area Clienti' }}</h1>
-  
-      <div class="login-form">
-        <div class="form-group">
-          <div class="field">
-            <label>Username:</label>
-            <input 
-              v-model="username" 
-              type="text" 
-              placeholder="Inserisci username"
-            >
-          </div>
-  
-          <div class="field">
-            <label>Password:</label>
-            <input 
-              v-model="password" 
-              type="password" 
-              placeholder="Inserisci password"
-            >
-          </div>
-  
-          <div class="actions">
-            <button @click="gestisciLogin" class="btn-invia">Invia</button>
-          </div>
-  
-          <p v-if="errore" class="error-message">{{ errore }}</p>
+</script>
+
+<template>
+  <div class="login-container">
+    <h1>Login {{ tipo === 'dipendente' ? 'Area Staff' : 'Area Clienti' }}</h1>
+
+    <div class="login-form">
+      <div class="form-group">
+        <div class="field">
+          <label>Username:</label>
+          <input v-model="username" type="text" placeholder="Inserisci username">
         </div>
+
+        <div class="field">
+          <label>Password:</label>
+          <input v-model="password" type="password" placeholder="Inserisci password">
+        </div>
+
+        <div class="actions">
+          <button @click="gestisciLogin" class="btn-invia">Invia</button>
+        </div>
+
+        <p v-if="errore" class="error-message">{{ errore }}</p>
       </div>
     </div>
-  </template>
-  
-  <style scoped>
-  /* Il CSS è rimosso come richiesto. 
-     Usa il tuo style.css per togliere margini e decorazioni 
-     alle liste se decidi di usarle. 
-  */
-  </style>
+  </div>
+</template>

@@ -1,35 +1,40 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import Home from '../pages/Home.vue';
-import Hotel from '../pages/Hotel.vue';
-import SceltaAccesso from '../pages/SceltaAccesso.vue';
-import Login from '../pages/Login.vue';
-
+// 1. Importa i tuoi componenti (assicurati che i nomi dei file siano giusti)
+import HomeView from '../views/Home.vue';
+import Hotel from '../views/Hotel.vue';
+import Login from '../views/Login.vue';
+import SceltaAccesso from '../views/SceltaAccesso.vue';
+import Prenota from '../views/Prenota.vue'; // La nuova pagina che hai creato nel frontend
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: HomeView
   },
   {
     path: '/hotel',
     name: 'Hotel',
     component: Hotel
   },
-  // Questa è la rotta che ti serve per vedere i pulsanti
   {
     path: '/scelta-accesso',
     name: 'SceltaAccesso',
     component: SceltaAccesso
   },
-  // Questa rotta serve il form di login e riceve il parametro 'tipo'
   {
-    path: '/login/:tipo',
-    name: 'login',
-    component: Login,
-    props: true
+    path: '/login',
+    name: 'Login',
+    component: Login
   },
-  // Se l'utente scrive un URL sbagliato, lo rimandiamo alla Home invece di mostrare il 404
+  // 2. QUESTA È LA ROTTA CHE RISOLVE IL 404
+  {
+    path: '/prenota/:idcamera', // Accetta l'ID della camera dal database
+    name: 'Prenota',
+    component: Prenota,
+    props: true // Passa l'ID al componente Prenota.vue come variabile
+  },
+  // Rotta di cattura per errori 404 nel frontend
   {
     path: '/:pathMatch(.*)*',
     redirect: '/'
@@ -37,7 +42,7 @@ const routes: Array<RouteRecordRaw> = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(process.env.BASE_URL),
   routes
 });
 
