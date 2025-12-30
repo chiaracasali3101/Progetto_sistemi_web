@@ -511,3 +511,17 @@ nav.menu-open ul li a.router-link-active {
       border-radius: 4px;
       cursor: pointer;
   }
+
+/* Login utente */
+error-message {
+  color: #e74c3c;
+  font-weight: bold;
+  margin-top: 15px;
+  background-color: #fceae9;
+  padding: 10px;
+  border-radius: 4px;
+}
+.login-container { text-align: center; padding: 50px; }
+.login-form { max-width: 350px; margin: 0 auto; }
+.field { margin-bottom: 20px; display: flex; flex-direction: column; text-align: left; }
+.btn-invia { width: 100%; padding: 10px; background-color: #3498db; color: white; border: none; cursor: pointer; }
