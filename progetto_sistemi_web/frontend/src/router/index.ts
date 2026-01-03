@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-// 1. Importa i tuoi componenti (assicurati che i nomi dei file siano giusti)
+// Importazione delle pagine del frontend
 import HomeView from '../views/Home.vue';
 import Hotel from '../views/Hotel.vue';
 import Login from '../views/Login.vue';
 import SceltaAccesso from '../views/SceltaAccesso.vue';
-import Prenota from '../views/Prenota.vue'; // La nuova pagina che hai creato nel frontend
+import Prenota from '../views/Prenota.vue'; 
+import ModificaCamera from '../views/ModificaCamera.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -12,29 +13,41 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Home',
     component: HomeView
   },
+
   {
     path: '/hotel',
     name: 'Hotel',
     component: Hotel
   },
+
   {
     path: '/scelta-accesso',
     name: 'SceltaAccesso',
     component: SceltaAccesso
   },
+
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    props: true // Permette di ricevere il 'tipo' (cliente/dipendente)
   },
-  // 2. QUESTA È LA ROTTA CHE RISOLVE IL 404
+
   {
-    path: '/prenota/:idcamera', // Accetta l'ID della camera dal database
+    path: '/prenota/:idcamera', 
     name: 'Prenota',
     component: Prenota,
-    props: true // Passa l'ID al componente Prenota.vue come variabile
+    props: true // Passa l'ID camera dal DB al componente
   },
-  // Rotta di cattura per errori 404 nel frontend
+  
+  {
+    path: '/modifica-camera/:idcamera', // Deve avere i due punti per il parametro dinamico
+    name: 'ModificaCamera',
+    component: () => import('../views/ModificaCamera.vue'), // Assicurati che il percorso sia giusto
+    props: true // Obbligatorio per passare l'ID come prop al componente
+  },
+
+  // Risolve il problema del 404 reindirizzando alla Home
   {
     path: '/:pathMatch(.*)*',
     redirect: '/'
@@ -42,7 +55,7 @@ const routes: Array<RouteRecordRaw> = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory(import.meta.env.BASE_URL || '/'),
   routes
 });
 
