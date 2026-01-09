@@ -3,28 +3,23 @@
   import axios from "axios";
   
   export default defineComponent({
+    name: "Home",
     data() {
       return {
         recensioni: [] as any[],
         nuovaRecensione: { testo: "", voto: 5 },
-        isLoggedIn: false,
-        ruolo: "",
-        utente: null as any
+        // Nuovi campi per il sistema di login aggiornato
+        username: localStorage.getItem('username') || null,
+        tipo: localStorage.getItem('tipo') || null
       };
     },
     methods: {
-      // Recupera i dati dell'utente dal localStorage
+      // Sincronizza lo stato del login dal localStorage
       checkLogin() {
-        const userData = localStorage.getItem('utente_loggato');
-        const ruoloSalvato = localStorage.getItem('ruolo_utente');
-        
-        if (userData) {
-          this.isLoggedIn = true;
-          this.utente = JSON.parse(userData);
-          this.ruolo = ruoloSalvato || "";
-        }
+        this.username = localStorage.getItem('username');
+        this.tipo = localStorage.getItem('tipo');
       },
-      // Carica la lista delle recensioni
+      // Recupera la lista delle recensioni dal database
       getRecensioni() {
         axios.get("/api/recensioni")
           .then(res => {
@@ -32,23 +27,23 @@
           })
           .catch(err => console.error("Errore caricamento recensioni:", err));
       },
-      // Invia una nuova recensione (solo se cliente)
+      // Invia la recensione al backend
       inviaRecensione() {
-        if (!this.nuovaRecensione.testo.trim()) return;
+        if (!this.nuovaRecensione.testo.trim() || !this.username) return;
   
         const dati = {
-          username: this.utente.username,
+          username: this.username, // Usa lo username corretto dal localStorage
           testo: this.nuovaRecensione.testo,
           voto: this.nuovaRecensione.voto
         };
   
         axios.post("/api/recensioni", dati)
           .then(() => {
-            this.nuovaRecensione.testo = ""; // Pulisce il form
-            this.getRecensioni(); // Ricarica la lista per mostrare l'ultima inserita
+            this.nuovaRecensione.testo = ""; // Resetta il campo testo
+            this.getRecensioni(); // Ricarica la lista per mostrare la nuova recensione
             alert("Grazie! La tua recensione è stata pubblicata.");
           })
-          .catch(err => console.error("Errore nell'invio:", err));
+          .catch(err => console.error("Errore nell'invio della recensione:", err));
       }
     },
     mounted() {
@@ -99,7 +94,7 @@
         </div>
         <p v-else class="no-reviews">Non ci sono ancora recensioni.</p>
   
-        <div v-if="isLoggedIn && ruolo === 'cliente'" class="write-review-area">
+        <div v-if="username && tipo === 'cliente'" class="write-review-area">
           <h4>Lascia il tuo commento</h4>
           <textarea v-model="nuovaRecensione.testo" placeholder="Raccontaci la tua vacanza..."></textarea>
           <div class="form-footer">
@@ -112,7 +107,7 @@
         </div>
   
         <div v-else class="review-notice">
-          <p v-if="ruolo === 'dipendente'">
+          <p v-if="tipo === 'dipendente'">
             Sei loggato come staff: non puoi inserire recensioni.
           </p>
           <p v-else>
@@ -122,5 +117,3 @@
       </section>
     </div>
   </template>
-  
-  

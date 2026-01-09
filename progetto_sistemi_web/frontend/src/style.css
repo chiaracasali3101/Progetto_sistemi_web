@@ -551,3 +551,218 @@ error-message {
   textarea { width: 100%; height: 100px; padding: 15px; border-radius: 8px; border: 1px solid #ccc; margin-bottom: 15px; resize: none; }
   .btn-submit { background: #2c3e50; color: white; padding: 12px 25px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
   .review-notice { margin-top: 30px; color: #888; font-style: italic; }
+
+
+  /* Stile per la pagina Hotel */
+.hotel-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.lista-camere {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.camera-card {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.camera-card h3 {
+  margin: 0;
+  color: #333;
+}
+
+/* Pulsanti dinamici */
+.btn-prenota {
+  display: inline-block;
+  background-color: #28a745; /* Verde */
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.btn-edit {
+  display: inline-block;
+  background-color: #007bff; /* Blu */
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.btn-prenota:hover, .btn-edit:hover {
+  opacity: 0.9;
+}
+
+.btn-login-prompt {
+  display: inline-block;
+  background-color: #6c757d; /* Grigio scuro per distinguerlo dai tasti azione */
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 0.9em;
+  font-weight: bold;
+  border: 1px dashed #fff;
+}
+
+.btn-login-prompt:hover {
+  background-color: #5a6268;
+  text-decoration: underline;
+}
+
+/* Stile della User Pill */
+.user-pill {
+  position: absolute;
+  top: 15px;
+  right: 80px; /* Distanziata dal tasto hamburger */
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 5px 12px;
+  border-radius: 50px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+  z-index: 10;
+}
+
+/* Icona rotonda con l'iniziale */
+.user-avatar {
+  width: 28px;
+  height: 28px;
+  background-color: #007bff; /* Colore blu hotel */
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.8em;
+  margin-right: 8px;
+}
+
+.user-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.pill-name {
+  font-size: 0.85em;
+  font-weight: 600;
+  color: #333;
+}
+
+.pill-role {
+  font-size: 0.65em;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Nascondi la pillola su schermi molto piccoli se disturba */
+@media (max-width: 480px) {
+  .user-pill {
+    right: 70px;
+    padding: 4px 8px;
+  }
+  .pill-role { display: none; } /* Mostra solo il nome su mobile */
+}
+
+/* Container della scelta accesso */
+.scelta-container {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Griglia delle Card per la scelta */
+.cards-wrapper {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.access-card {
+  flex: 1;
+  max-width: 350px;
+  padding: 40px 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 15px;
+  text-decoration: none;
+  color: #333;
+  background: white;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.access-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.card-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+/* Box Utente Già Loggato */
+.already-logged-box {
+  background: white;
+  padding: 50px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  border: 1px solid #28a745;
+}
+
+.status-icon-big {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.scelta-actions {
+  margin-top: 30px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+/* Pulsanti */
+.btn-logout-scelta {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-continue {
+  display: inline-block;
+  text-decoration: none;
+  background-color: #007bff;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-weight: bold;
+}

@@ -2,6 +2,16 @@
   <div id="app-wrapper">
     
     <header class="main-header">
+      <div v-if="username" class="user-pill">
+        <div class="user-avatar">
+          {{ username.charAt(0).toUpperCase() }}
+        </div>
+        <div class="user-text">
+          <span class="pill-name">{{ username }}</span>
+          <span class="pill-role">{{ tipo }}</span>
+        </div>
+      </div>
+
       <div class="header-brand">
         <h1>Grand Hotel Mattei</h1>
         <img src="./immagini/hotel.png" alt="Immagine Hotel Mattei" class="nav-logo">
@@ -19,9 +29,9 @@
           <li><router-link to="/hotel" @click="closeMenu">Hotel</router-link></li>
           <li><router-link to="/spiaggia" @click="closeMenu">Spiaggia</router-link></li>
           <li><router-link to="/ristorante" @click="closeMenu">Ristorante</router-link></li>
-          <li><router-link to="/scelta-accesso">Login</router-link></li>
-  
+          <li><router-link to="/scelta-accesso" @click="closeMenu">Login</router-link></li>
           <li><router-link to="/contatti" @click="closeMenu">Contattaci</router-link></li>
+          <li v-if="username"><router-link to="/prenotazioni" @click="closeMenu">Prenotazioni</router-link></li>
         </ul>
       </nav>
     </header>
@@ -32,25 +42,27 @@
 
     <footer>
       <p>Viale Bologna 5, Ravenna</p>
-      <p class="mb-0">Contatti:</p>
-          <p class="mb-0">telefono: 0544 408783</p>
-          <p class="mb-0">mail: grandhotelmattei@gmail.com</p>
+      <p>telefono: 0544 408783 | mail: grandhotelmattei@gmail.com</p>
     </footer>
-    
-
   </div>
 </template>
 
 <script setup lang="ts">
-// Composition API e TypeScript
-import { ref } from 'vue';
+import { ref, watch, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 
-// Stato per controllare l'apertura/chiusura del menù
 const isMenuOpen = ref(false);
+const username = ref<string | null>(null);
+const tipo = ref<string | null>(null);
+const route = useRoute();
+
+const updateUserData = () => {
+  username.value = localStorage.getItem('username');
+  tipo.value = localStorage.getItem('tipo');
+};
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
-  // Gestisce il blocco dello scroll del body su mobile
   document.body.style.overflow = isMenuOpen.value ? 'hidden' : 'auto';
 };
 
@@ -58,5 +70,12 @@ const closeMenu = () => {
   isMenuOpen.value = false;
   document.body.style.overflow = 'auto';
 };
-</script>
 
+watch(() => route.path, () => {
+  updateUserData();
+});
+
+onMounted(() => {
+  updateUserData();
+});
+</script>

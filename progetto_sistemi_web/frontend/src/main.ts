@@ -12,10 +12,9 @@ import Contatti from "./pages/Contatti.vue";
 import NotFound from "./pages/NotFound.vue"; 
 import SceltaAccesso from "./pages/SceltaAccesso.vue"; 
 import AreaRiservata from "./pages/AreaRiservata.vue"; 
-
-// AGGIUNTO: Importa il componente per la modifica camera
-// Assicurati che il file si trovi nella cartella src/pages/
 import ModificaCamera from "./pages/ModificaCamera.vue"; 
+import Prenotazioni from "./pages/Prenotazioni.vue";
+
 
 const router: Router = createRouter({
   history: createWebHistory(),
@@ -38,7 +37,7 @@ const router: Router = createRouter({
       props: true 
     },
 
-    // AGGIUNTO: Nuova rotta per la modifica della camera
+    //Rotta per la modifica della camera
     { 
       path: "/modifica-camera/:idcamera", 
       name: "ModificaCamera", 
@@ -46,9 +45,16 @@ const router: Router = createRouter({
       props: true 
     },
 
+    //pagina prenotazioni
+    { 
+      path: "/prenotazioni", 
+      name: "Prenotazioni", 
+      component: Prenotazioni 
+    },
+
     { path: "/contatti", component: Contatti },
 
-    // Catch-all: se l'URL non esiste, mostra NotFound
+    //se l'URL non esiste, mostra NotFound
     { path: "/:pathMatch(.*)*", component: NotFound },
   ]
 });
