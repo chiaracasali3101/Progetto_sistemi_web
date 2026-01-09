@@ -22,7 +22,7 @@ router.get("/camere", (req: Request, res: Response) => {
 });
 
 // --- 2. ROTTA PER AGGIORNARE LE CAMERE (PUT) ---
-// Questa rotta serve ai dipendenti come Martina1
+// Questa rotta serve ai dipendenti per modificare le camere
 router.put("/camere/:id", (req: Request, res: Response) => {
     const id = req.params.id;
     const { nomecamera, descrizionecamera, prezzocamera } = req.body;

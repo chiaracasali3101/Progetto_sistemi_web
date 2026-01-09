@@ -8,13 +8,14 @@ import Hotel from "./pages/Hotel.vue";
 import Spiaggia from "./pages/Spiaggia.vue";
 import Ristorante from "./pages/Ristorante.vue";
 import Login from "./pages/Login.vue";
-//import Prenotazioni from "./pages/Prenotazioni.vue";
 import Contatti from "./pages/Contatti.vue"; 
 import NotFound from "./pages/NotFound.vue"; 
 import SceltaAccesso from "./pages/SceltaAccesso.vue"; 
-
-// AGGIUNTO: Importa il nuovo componente dell'area riservata
 import AreaRiservata from "./pages/AreaRiservata.vue"; 
+
+// AGGIUNTO: Importa il componente per la modifica camera
+// Assicurati che il file si trovi nella cartella src/pages/
+import ModificaCamera from "./pages/ModificaCamera.vue"; 
 
 const router: Router = createRouter({
   history: createWebHistory(),
@@ -29,8 +30,7 @@ const router: Router = createRouter({
     { path: "/login/:tipo", name: "login", component: Login, props: true },
     { path: "/login", redirect: "/scelta-accesso" },
 
-    // AGGIUNTO: Rotta per l'Area Riservata dopo il login
-    // Usiamo :tipo per sapere se mostrare i tasti staff o quelli cliente
+    // Area Riservata
     { 
       path: "/area-riservata/:tipo", 
       name: "AreaRiservata", 
@@ -38,8 +38,17 @@ const router: Router = createRouter({
       props: true 
     },
 
-    //{ path: "/prenotazioni", component: Prenotazioni },
+    // AGGIUNTO: Nuova rotta per la modifica della camera
+    { 
+      path: "/modifica-camera/:idcamera", 
+      name: "ModificaCamera", 
+      component: ModificaCamera, 
+      props: true 
+    },
+
     { path: "/contatti", component: Contatti },
+
+    // Catch-all: se l'URL non esiste, mostra NotFound
     { path: "/:pathMatch(.*)*", component: NotFound },
   ]
 });
