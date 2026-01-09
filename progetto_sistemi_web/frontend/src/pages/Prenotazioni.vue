@@ -1,16 +1,18 @@
 <template>
   <div class="prenotazioni-container">
-    <h1>Le mie Prenotazioni</h1>
+    <h1>{{ tipo === 'cliente' ? 'Le mie Prenotazioni' : 'Gestione Tutte le Prenotazioni' }}</h1>
 
     <div v-if="listaPrenotazioni.length === 0" class="no-data">
-      <p>Non hai ancora effettuato nessuna prenotazione.</p>
-      <router-link to="/hotel" class="btn-primary">Prenota ora la tua camera</router-link>
+      <p v-if="tipo === 'cliente'">Non hai ancora effettuato nessuna prenotazione.</p>
+      <p v-else>Non ci sono prenotazioni nel sistema.</p>
+      <router-link v-if="tipo === 'cliente'" to="/hotel" class="btn-primary">Prenota ora</router-link>
     </div>
 
     <div v-else class="tabella-prenotazioni">
       <table>
         <thead>
           <tr>
+            <th v-if="tipo !== 'cliente'">Cliente</th>
             <th>Camera</th>
             <th>Check-in</th>
             <th>Check-out</th>
@@ -20,6 +22,8 @@
         </thead>
         <tbody>
           <tr v-for="p in listaPrenotazioni" :key="p.idprenotazione">
+            <td v-if="tipo !== 'cliente'"><strong>{{ p.username }}</strong></td>
+            
             <td>Camera #{{ p.idcamera }}</td>
             
             <td>{{ new Date(p.datainizio).toLocaleDateString('it-IT') }}</td>
@@ -28,7 +32,7 @@
             <td>{{ p.ospiti }}</td>
             <td>
               <button @click="cancellaPrenotazione(p.idprenotazione)" class="btn-delete">
-                Annulla
+                {{ tipo === 'cliente' ? 'Annulla' : 'Elimina' }}
               </button>
             </td>
           </tr>
@@ -42,24 +46,20 @@
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 
-// Variabile reattiva per i dati
 const listaPrenotazioni = ref<any[]>([]);
 
-// Recupero dati dall'utente loggato
+// Recuperiamo username e tipo dal localStorage
 const username = localStorage.getItem('username');
-const tipo = localStorage.getItem('tipo') || 'cliente'; // Default a cliente se manca
+const tipo = localStorage.getItem('tipo'); // Può essere 'cliente' o 'dipendente'/'staff'
 
-/**
- * Funzione per caricare le prenotazioni dal Backend
- */
 const caricaPrenotazioni = async () => {
-  if (!username) {
-    console.error("Errore: Nessun utente loggato nel localStorage");
+  if (!username || !tipo) {
+    console.error("Dati utente non trovati nel localStorage");
     return;
   }
 
   try {
-    // Chiamata al backend passando i parametri come query string
+    // Inviando 'tipo' e 'username', il backend decide se filtrare o mostrare tutto
     const res = await axios.get('/api/prenotazioni', {
       params: { 
         username: username,
@@ -68,28 +68,27 @@ const caricaPrenotazioni = async () => {
     });
 
     listaPrenotazioni.value = res.data;
-    console.log("Dati caricati correttamente:", res.data);
+    console.log("Dati ricevuti:", res.data);
   } catch (err) {
-    console.error("Errore nel caricamento delle prenotazioni:", err);
+    console.error("Errore nel caricamento:", err);
   }
 };
 
-/**
- * Funzione per cancellare una prenotazione
- */
 const cancellaPrenotazione = async (id: number) => {
-  if (!confirm("Sei sicuro di voler annullare questa prenotazione?")) return;
+  const messaggio = tipo === 'cliente' 
+    ? "Vuoi davvero annullare la tua prenotazione?" 
+    : "Sei sicuro di voler eliminare questa prenotazione utente?";
+
+  if (!confirm(messaggio)) return;
 
   try {
     await axios.delete(`/api/prenotazioni/${id}`);
-    // Ricarica la lista dopo la cancellazione
-    await caricaPrenotazioni();
+    await caricaPrenotazioni(); // Ricarica la lista aggiornata
   } catch (err) {
-    console.error("Errore durante la cancellazione:", err);
+    console.error("Errore cancellazione:", err);
   }
 };
 
-// Esegue il caricamento appena il componente viene montato
 onMounted(() => {
   caricaPrenotazioni();
 });

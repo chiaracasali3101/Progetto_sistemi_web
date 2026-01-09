@@ -870,3 +870,39 @@ error-message {
   text-align: center;
   margin-top: 50px;
 }
+
+
+/* Stili per evidenziare la colonna utente */
+th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+td strong {
+  color: #007bff;
+}
+.prenotazioni-container {
+  padding: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.tabella-prenotazioni table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+.tabella-prenotazioni th, .tabella-prenotazioni td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+.btn-delete {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.btn-delete:hover {
+  background-color: #cc0000;
+}
