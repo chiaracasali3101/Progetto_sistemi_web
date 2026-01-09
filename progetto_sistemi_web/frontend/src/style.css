@@ -541,3 +541,13 @@ error-message {
 .btn-modifica { background-color: #f39c12; color: white; padding: 10px 15px; border-radius: 5px; text-decoration: none; display: inline-block; margin-top: 10px; }
 .btn-login-required { background-color: #34495e; color: white; padding: 10px 15px; border-radius: 5px; text-decoration: none; display: inline-block; margin-top: 10px; }
 .btn-logout { background: #e74c3c; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; }
+
+  /* Stili Recensioni */
+  .reviews-section { text-align: center; }
+  .reviews-grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 30px; }
+  .review-card { background: #fff; border: 1px solid #ddd; padding: 20px; border-radius: 12px; width: 320px; text-align: left; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+  .reviewer-stars { color: #f1c40f; margin: 10px 0; }
+  .write-review-area { background: #f9f9f9; padding: 30px; border-radius: 15px; margin-top: 50px; max-width: 700px; margin-left: auto; margin-right: auto; }
+  textarea { width: 100%; height: 100px; padding: 15px; border-radius: 8px; border: 1px solid #ccc; margin-bottom: 15px; resize: none; }
+  .btn-submit { background: #2c3e50; color: white; padding: 12px 25px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+  .review-notice { margin-top: 30px; color: #888; font-style: italic; }

@@ -7,12 +7,16 @@ import historyApiFallback from "connect-history-api-fallback";
 import camereRouter from "./routes/camere-router";
 import prenotazioniRouter from "./routes/prenotazioni-router";
 import loginRouter from "./routes/login-router";
+import recensioniRouter from "./routes/recensioni-router";
 
 const app: Express = express();
 const port: number = 3000;
 
-// 2. Configurazione Connessione Database
-// Usiamo il nome 'Hotel' che hai confermato essere quello corretto
+//per le recensioni
+app.use(express.json());
+app.use("/api", recensioniRouter);
+
+//Configurazione Connessione Database
 export const db = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -30,28 +34,32 @@ db.connect((err) => {
 
 app.use(historyApiFallback());
 
-// 3. Middleware per il parsing dei dati JSON
+//Middleware per il parsing dei dati JSON
 // Necessario per leggere i dati inviati da Axios (Login e Prenotazioni)
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// 4. Rotte API
+//Rotte API
 // Devono stare PRIMA del historyApiFallback per non essere intercettate dal frontend
+app.use("/api", recensioniRouter);
 app.use("/api", camereRouter);       // Gestirà axios.get("/api/camere")
 app.use("/api", prenotazioniRouter); // Gestirà axios.post("/api/prenotazioni")
 app.use("/api", loginRouter);        // Gestirà axios.post("/api/login")
 
-// 6. Servizio dei file statici
+//Fallback per Single Page Application (Dopo le API!)
+app.use(historyApiFallback());
+
+//Servizio dei file statici
 // Serve la cartella public (per le immagini) e dist-frontend (il sito compilato)
 app.use(express.static("public"));
 app.use(express.static("dist-frontend"));
 
-// 7. Gestione errore 404 per risorse mancanti
+//Gestione errore 404 per risorse mancanti
 app.use(function(req, res, next) {
   res.status(404).send("Ops... La risorsa richiesta non è stata trovata sul server.");
 });
 
-// 8. Avvio del Server
+//Avvio del Server
 app.listen(port, function() {
   console.log(`Server Backend attivo su http://localhost:${port}`);
 });
