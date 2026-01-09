@@ -1,48 +1,64 @@
 import express, { Request, Response } from "express";
-import { db } from "../app"; 
+import { db } from "../app"; // Importa il pool esportato da app.ts
 
 const router = express.Router();
 
-// --- 1. SALVATAGGIO PRENOTAZIONE ---
-router.post("/prenotazioni", (req: Request, res: Response) => {
-    // Usiamo i nomi che arrivano dal form Vue: idcamera, username, datainizio, datafine, ospiti
-    const { idcamera, username, datainizio, datafine, ospiti } = req.body;
-
-    const sql = "INSERT INTO prenotazioni (idcamera, username, datainizio, datafine, ospiti) VALUES (?, ?, ?, ?, ?)";
-    
-    db.query(sql, [idcamera, username, datainizio, datafine, ospiti], (err) => {
-        if (err) {
-            console.error("Errore SQL:", err);
-            return res.status(500).json({ success: false, error: err.message });
-        }
-        res.json({ success: true, message: "Prenotazione registrata!" });
-    });
-});
-
-// --- 2. LETTURA PRENOTAZIONI (Filtrata) ---
+// --- 1. LETTURA PRENOTAZIONI (GET) ---
 router.get("/prenotazioni", (req: Request, res: Response) => {
     const { username, tipo } = req.query;
+    
+    console.log(`🔍 Richiesta prenotazioni: User=${username}, Tipo=${tipo}`);
 
     let sql = "SELECT * FROM prenotazioni";
     let params: any[] = [];
 
-    // Se è cliente, vede solo le sue. Se è dipendente, vede tutto.
-    if (tipo === "cliente") {
+    // Se è un cliente, filtriamo per il suo username
+    if (tipo === "cliente" && username) {
         sql += " WHERE username = ?";
         params.push(username);
     }
 
     db.query(sql, params, (err, results) => {
-        if (err) return res.status(500).json(err);
+        if (err) {
+            console.error("Errore SQL nella GET:", err.message);
+            return res.status(500).json({ error: "Errore database" });
+        }
+        
+        console.log("📦 Dati pronti per il frontend:", results);
         res.json(results);
     });
 });
 
-// --- 3. CANCELLAZIONE ---
+// --- 2. SALVATAGGIO PRENOTAZIONE (POST) ---
+router.post("/prenotazioni", (req: Request, res: Response) => {
+    const { idcamera, username, datainizio, datafine, ospiti } = req.body;
+
+    const sql = "INSERT INTO prenotazioni (idcamera, username, datainizio, datafine, ospiti) VALUES (?, ?, ?, ?, ?)";
+    
+    db.query(sql, [
+      Number(idcamera), 
+      username, 
+      datainizio, 
+      datafine, 
+      Number(ospiti)
+    ], (err) => {
+        if (err) {
+            console.error("Errore SQL nella POST:", err.message);
+            return res.status(500).json({ success: false, error: err.message });
+        }
+        res.json({ success: true });
+    });
+});
+
+// --- 3. CANCELLAZIONE (DELETE) ---
 router.delete("/prenotazioni/:id", (req: Request, res: Response) => {
     const sql = "DELETE FROM prenotazioni WHERE idprenotazione = ?";
+    
     db.query(sql, [req.params.id], (err) => {
-        if (err) return res.status(500).json(err);
+        if (err) {
+            console.error("Errore SQL nella DELETE:", err.message);
+            return res.status(500).json(err);
+        }
         res.json({ success: true });
     });
 });

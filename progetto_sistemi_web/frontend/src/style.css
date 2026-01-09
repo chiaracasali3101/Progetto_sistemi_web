@@ -766,3 +766,107 @@ error-message {
   border-radius: 8px;
   font-weight: bold;
 }
+
+/* Container Calendario */
+.calendar-wrapper {
+  max-width: 400px;
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* La Griglia a 7 colonne */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  text-align: center;
+}
+
+.day-name {
+  font-weight: bold;
+  font-size: 0.8em;
+  color: #888;
+  padding-bottom: 10px;
+}
+
+/* Il quadratino del giorno */
+.day-square {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 0.9em;
+  transition: 0.2s;
+  border: 1px solid #f0f0f0;
+}
+
+.day-square:hover:not(.disabled) {
+  background-color: #e3f2fd;
+}
+
+.day-square.disabled {
+  color: #ccc;
+  cursor: not-allowed;
+  background: #f9f9f9;
+}
+
+/* Colori della selezione */
+.day-square.selected {
+  background-color: #007bff !important;
+  color: white;
+  font-weight: bold;
+}
+
+.day-square.in-range {
+  background-color: #d1e7ff;
+}
+
+.day-square.today {
+  border: 2px solid #007bff;
+}
+
+.booking-summary {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+/*prenotazioni*/
+.prenotazioni-container {
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.tabella-prenotazioni table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.tabella-prenotazioni th, .tabella-prenotazioni td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+.btn-delete {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.no-data {
+  text-align: center;
+  margin-top: 50px;
+}

@@ -14,7 +14,8 @@ import SceltaAccesso from "./pages/SceltaAccesso.vue";
 import AreaRiservata from "./pages/AreaRiservata.vue"; 
 import ModificaCamera from "./pages/ModificaCamera.vue"; 
 import Prenotazioni from "./pages/Prenotazioni.vue";
-
+// 1. IMPORTA IL NUOVO COMPONENTE
+import Prenota from "./pages/Prenota.vue";
 
 const router: Router = createRouter({
   history: createWebHistory(),
@@ -25,40 +26,23 @@ const router: Router = createRouter({
     { path: "/ristorante", component: Ristorante },
     { path: "/scelta-accesso", component: SceltaAccesso },
     
-    // Login con parametro :tipo
     { path: "/login/:tipo", name: "login", component: Login, props: true },
     { path: "/login", redirect: "/scelta-accesso" },
 
-    // Area Riservata
+    // 2. AGGIUNGI LA ROTTA PER PRENOTARE
     { 
-      path: "/area-riservata/:tipo", 
-      name: "AreaRiservata", 
-      component: AreaRiservata, 
+      path: "/prenota/:idcamera", 
+      name: "Prenota", 
+      component: Prenota, 
       props: true 
     },
 
-    //Rotta per la modifica della camera
-    { 
-      path: "/modifica-camera/:idcamera", 
-      name: "ModificaCamera", 
-      component: ModificaCamera, 
-      props: true 
-    },
-
-    //pagina prenotazioni
-    { 
-      path: "/prenotazioni", 
-      name: "Prenotazioni", 
-      component: Prenotazioni 
-    },
-
+    { path: "/area-riservata/:tipo", name: "AreaRiservata", component: AreaRiservata, props: true },
+    { path: "/modifica-camera/:idcamera", name: "ModificaCamera", component: ModificaCamera, props: true },
+    { path: "/prenotazioni", name: "Prenotazioni", component: Prenotazioni },
     { path: "/contatti", component: Contatti },
-
-    //se l'URL non esiste, mostra NotFound
     { path: "/:pathMatch(.*)*", component: NotFound },
   ]
 });
 
-createApp(App)
-  .use(router)
-  .mount("#app")
+createApp(App).use(router).mount("#app");
