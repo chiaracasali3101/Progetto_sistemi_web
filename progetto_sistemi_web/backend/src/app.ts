@@ -9,43 +9,37 @@ import recensioniRouter from "./routes/recensioni-router";
 const app: Express = express();
 const port: number = 3000;
 
-// --- 1. MIDDLEWARE PER I DATI ---
+// middleware per i dati
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true }));
 
-// --- 2. ROTTE API ---
+// rotte api
 app.use("/api", camereRouter);       
 app.use("/api", prenotazioniRouter); 
 app.use("/api", loginRouter);        
 app.use("/api", recensioniRouter);
 
-// --- 3. GESTIONE FILE STATICI ---
+// gestione file statici
 app.use(express.static("public")); 
 
-// --- 4. CONNESSIONE DATABASE (Versione ROBUSTA con Pool) ---
-// Il pool gestisce le riconnessioni automaticamente se il DB cade o va in timeout
-export const db = mysql.createPool({
+// connessione ad database
+export const db = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "",
   database: "Hotel",
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0
 });
 
-// Testiamo la connessione all'avvio
-db.getConnection((err, connection) => {
+// test della connessione
+db.connect((err) => {
   if (err) {
-    console.error("ERRORE CRITICO: Impossibile collegarsi a MySQL via XAMPP:", err.message);
-    console.log("Assicurati che XAMPP sia aperto e che MySQL sia RUNNING (verde).");
+    console.error("Errore di connessione al database:", err.message);
     return;
   }
-  console.log("✅ Connessione al database 'Hotel' stabilita con successo!");
-  connection.release(); // Rilasciamo la connessione di test nel pool
+  console.log("Connessione al database stabilita correttamente.");
 });
 
-// --- 5. AVVIO SERVER ---
+// avvio server
 app.listen(port, () => {
-  console.log(`🚀 Server Backend attivo su http://localhost:${port}`);
+  console.log(`Server attivo su http://localhost:${port}`);
 });

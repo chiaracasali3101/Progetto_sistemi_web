@@ -37,7 +37,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 
-// Stato reattivo per il controllo login
 const isLoggedIn = ref(false);
 const currentUser = ref<string | null>('');
 const currentRole = ref<string | null>('');
@@ -56,11 +55,9 @@ const checkStatus = () => {
 };
 
 const logout = () => {
-  // Pulisce tutto e aggiorna la vista
   localStorage.clear();
   checkStatus();
-  // Opzionale: ricarica per aggiornare anche la User Pill in alto
-  window.location.reload();
+  //window.location.reload();
 };
 
 onMounted(() => {

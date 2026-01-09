@@ -48,7 +48,6 @@ export default defineComponent({
   data() {
     return {
       camere: [] as any[],
-      // Recupera il ruolo. Se non c'è, sarà null.
       tipoUtente: localStorage.getItem('tipo') 
     };
   },

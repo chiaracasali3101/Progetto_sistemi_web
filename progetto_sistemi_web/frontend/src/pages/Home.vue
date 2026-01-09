@@ -8,13 +8,11 @@
       return {
         recensioni: [] as any[],
         nuovaRecensione: { testo: "", voto: 5 },
-        // Nuovi campi per il sistema di login aggiornato
         username: localStorage.getItem('username') || null,
         tipo: localStorage.getItem('tipo') || null
       };
     },
     methods: {
-      // Sincronizza lo stato del login dal localStorage
       checkLogin() {
         this.username = localStorage.getItem('username');
         this.tipo = localStorage.getItem('tipo');
@@ -27,20 +25,19 @@
           })
           .catch(err => console.error("Errore caricamento recensioni:", err));
       },
-      // Invia la recensione al backend
       inviaRecensione() {
         if (!this.nuovaRecensione.testo.trim() || !this.username) return;
   
         const dati = {
-          username: this.username, // Usa lo username corretto dal localStorage
+          username: this.username, 
           testo: this.nuovaRecensione.testo,
           voto: this.nuovaRecensione.voto
         };
   
         axios.post("/api/recensioni", dati)
           .then(() => {
-            this.nuovaRecensione.testo = ""; // Resetta il campo testo
-            this.getRecensioni(); // Ricarica la lista per mostrare la nuova recensione
+            this.nuovaRecensione.testo = ""; 
+            this.getRecensioni(); 
             alert("Grazie! La tua recensione è stata pubblicata.");
           })
           .catch(err => console.error("Errore nell'invio della recensione:", err));

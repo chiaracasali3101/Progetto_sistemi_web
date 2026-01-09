@@ -1,13 +1,13 @@
 import express, { Request, Response } from "express";
-import { db } from "../app"; // Importa il pool esportato da app.ts
+import { db } from "../app"; 
 
 const router = express.Router();
 
-// --- 1. LETTURA PRENOTAZIONI (GET) ---
+// lettura prenotazioni 
 router.get("/prenotazioni", (req: Request, res: Response) => {
     const { username, tipo } = req.query;
     
-    console.log(`🔍 Richiesta prenotazioni: User=${username}, Tipo=${tipo}`);
+    console.log(`Richiesta prenotazioni: User=${username}, Tipo=${tipo}`);
 
     let sql = "SELECT * FROM prenotazioni";
     let params: any[] = [];
@@ -29,7 +29,7 @@ router.get("/prenotazioni", (req: Request, res: Response) => {
     });
 });
 
-// --- 2. SALVATAGGIO PRENOTAZIONE (POST) ---
+//salvataggio prenotazione
 router.post("/prenotazioni", (req: Request, res: Response) => {
     const { idcamera, username, datainizio, datafine, ospiti } = req.body;
 
@@ -50,7 +50,7 @@ router.post("/prenotazioni", (req: Request, res: Response) => {
     });
 });
 
-// --- 3. CANCELLAZIONE (DELETE) ---
+// cancellazione
 router.delete("/prenotazioni/:id", (req: Request, res: Response) => {
     const sql = "DELETE FROM prenotazioni WHERE idprenotazione = ?";
     

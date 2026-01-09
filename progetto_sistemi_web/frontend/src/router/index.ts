@@ -1,13 +1,12 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 
-// Importazione delle pagine del frontend
-import HomeView from '../views/Home.vue';
-import Hotel from '../views/Hotel.vue';
-import Login from '../views/Login.vue';
-import SceltaAccesso from '../views/SceltaAccesso.vue';
-import Prenota from '../views/Prenota.vue'; 
-// IMPORTANTE: Unico import statico per evitare errori di caricamento
-import ModificaCamera from '../views/ModificaCamera.vue'; 
+//pagine frontend
+import HomeView from '../pages/Home.vue';
+import Hotel from '../pages/Hotel.vue';
+import Login from '../pages/Login.vue';
+import SceltaAccesso from '../pages/SceltaAccesso.vue';
+import Prenota from '../pages/Prenota.vue'; 
+import ModificaCamera from '../pages/ModificaCamera.vue'; 
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -40,11 +39,10 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/modifica-camera/:idcamera',
     name: 'ModificaCamera',
-    // Usiamo direttamente il componente importato sopra
     component: ModificaCamera, 
     props: true 
   },
-  // Catch-all per gestire errori di navigazione
+
   {
     path: '/:pathMatch(.*)*',
     redirect: '/'

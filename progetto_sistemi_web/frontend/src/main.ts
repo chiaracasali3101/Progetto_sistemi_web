@@ -14,7 +14,6 @@ import SceltaAccesso from "./pages/SceltaAccesso.vue";
 import AreaRiservata from "./pages/AreaRiservata.vue"; 
 import ModificaCamera from "./pages/ModificaCamera.vue"; 
 import Prenotazioni from "./pages/Prenotazioni.vue";
-// 1. IMPORTA IL NUOVO COMPONENTE
 import Prenota from "./pages/Prenota.vue";
 
 const router: Router = createRouter({
@@ -29,7 +28,6 @@ const router: Router = createRouter({
     { path: "/login/:tipo", name: "login", component: Login, props: true },
     { path: "/login", redirect: "/scelta-accesso" },
 
-    // 2. AGGIUNGI LA ROTTA PER PRENOTARE
     { 
       path: "/prenota/:idcamera", 
       name: "Prenota", 

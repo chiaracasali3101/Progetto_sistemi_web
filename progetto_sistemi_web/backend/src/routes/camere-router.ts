@@ -3,11 +3,10 @@ import { db } from "../app";
 
 const router = express.Router();
 
-// --- 1. ROTTA PER LEGGERE LE CAMERE (GET) ---
+//rotta per accedere alle camere (usa GET)
 router.get("/camere", (req: Request, res: Response) => {
     console.log("Richiesta ricevuta: il frontend sta chiedendo la lista camere..."); //
 
-    // Usiamo il nome esatto della tua tabella: DettagliCamera
     const query = "SELECT * FROM DettagliCamera";
     
     db.query(query, (err, results) => {
@@ -21,7 +20,7 @@ router.get("/camere", (req: Request, res: Response) => {
     });
 });
 
-// --- 2. ROTTA PER AGGIORNARE LE CAMERE (PUT) ---
+// rotta per aggiornare le camere (PUT) 
 // Questa rotta serve ai dipendenti per modificare le camere
 router.put("/camere/:id", (req: Request, res: Response) => {
     const id = req.params.id;
@@ -46,5 +45,4 @@ router.put("/camere/:id", (req: Request, res: Response) => {
     });
 });
 
-// L'export deve stare sempre alla fine di tutte le rotte!
 export default router;

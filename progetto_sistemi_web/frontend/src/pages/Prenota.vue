@@ -58,7 +58,7 @@
   const props = defineProps(['idcamera']);
   const router = useRouter();
   
-  // Stato del calendario
+ //calendario
   const dataVisualizzata = ref(new Date());
   const nomiGiorni = ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom'];
   
@@ -70,7 +70,6 @@
     ospiti: 1
   });
   
-  // Calcoli per la griglia
   const annoCorrente = computed(() => dataVisualizzata.value.getFullYear());
   const nomeMeseCorrente = computed(() => 
     dataVisualizzata.value.toLocaleString('it-IT', { month: 'long' }).toUpperCase()
@@ -99,7 +98,7 @@
     return primoGiornoSettimana === 0 ? 6 : primoGiornoSettimana - 1; 
   });
   
-  // Logica di selezione
+ //selezione data
   const selezionaGiorno = (giorno: any) => {
     if (giorno.isPassato) return;
   

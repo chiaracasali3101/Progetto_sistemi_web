@@ -54,7 +54,7 @@ import axios from 'axios';
 
 export default defineComponent({
   name: 'Login',
-  props: ['tipo'], // Riceve 'cliente' o 'dipendente' dal router
+  props: ['tipo'], 
   data() {
     return {
       loginForm: {
@@ -62,7 +62,6 @@ export default defineComponent({
         password: ''
       },
       errorMessage: '',
-      // Stato locale per la reattività della pagina
       isLoggedIn: false,
       currentUser: '',
       currentRole: ''
@@ -97,7 +96,6 @@ export default defineComponent({
         });
 
         if (response.data.success) {
-          // Salvataggio nel browser
           localStorage.setItem('username', response.data.user.username);
           localStorage.setItem('tipo', response.data.user.ruolo);
           
@@ -114,8 +112,7 @@ export default defineComponent({
     logout() {
       // Pulisce la memoria
       localStorage.clear();
-      this.checkLoginStatus(); // Aggiorna la vista locale
-      // Opzionale: reindirizza o ricarica per aggiornare la User Pill in App.vue
+      this.checkLoginStatus();
       window.location.reload();
     }
   },

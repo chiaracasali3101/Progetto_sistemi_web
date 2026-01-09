@@ -48,9 +48,8 @@ import axios from 'axios';
 
 const listaPrenotazioni = ref<any[]>([]);
 
-// Recuperiamo username e tipo dal localStorage
 const username = localStorage.getItem('username');
-const tipo = localStorage.getItem('tipo'); // Può essere 'cliente' o 'dipendente'/'staff'
+const tipo = localStorage.getItem('tipo');
 
 const caricaPrenotazioni = async () => {
   if (!username || !tipo) {
@@ -59,7 +58,7 @@ const caricaPrenotazioni = async () => {
   }
 
   try {
-    // Inviando 'tipo' e 'username', il backend decide se filtrare o mostrare tutto
+    // in base al ruolo il backend mostra certe cose
     const res = await axios.get('/api/prenotazioni', {
       params: { 
         username: username,
@@ -83,7 +82,7 @@ const cancellaPrenotazione = async (id: number) => {
 
   try {
     await axios.delete(`/api/prenotazioni/${id}`);
-    await caricaPrenotazioni(); // Ricarica la lista aggiornata
+    await caricaPrenotazioni(); 
   } catch (err) {
     console.error("Errore cancellazione:", err);
   }

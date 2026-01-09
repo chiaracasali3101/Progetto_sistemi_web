@@ -1,45 +1,47 @@
-/* ------------------------------------
-    Reset Base & Stili Generali
-    ------------------------------------ */
-    body {
-      /* Base Font */
-      font-family: Verdana, sans-serif;
-      line-height: 1.6;
-      background-color: #ffffff;
-      color: #1b1d1d;
-  }
-  
-  h1{
-      color: #141515; 
-      margin-bottom: 0.8em;
-  }
-  h2, h3, h4, h5, h6 {
-      color: #166088; 
-      margin-bottom: 0.8em;
-  }
-  a {
-      color: #4a6fa5; 
-      text-decoration: none;
-  }
-  a:hover {
-      color: #166088;
-      text-decoration: underline;
-  }
-  
-  /* ------------------------------------
-     Variabili CSS Native (Per Hamburger Menu e Stili Globali)
-     ------------------------------------ */
-  :root {
+/* ==========================================================================
+   1. STILI GENERALI
+   ========================================================================== */
+   :root {
     --mobile-breakpoint: 768px;
-    --primary-color: #333; /* Colore scuro per le linee */
+    --primary-color: #333;
     --header-bg: #0f739d;
     --header-border: #4a6fa5;
     --transition-speed: 0.3s;
+    --color-text-light: #ffffff;
   }
   
-  /* ------------------------------------
-     Layout Base dell'Applicazione (Da App.vue)
-     ------------------------------------ */
+  body {
+    font-family: Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: #ffffff;
+    color: #1b1d1d;
+    margin: 0;
+    text-align: justify; /*per giustificare i testi*/
+  }
+  
+  h1 {
+    color: #141515;
+    margin-bottom: 0.8em;
+  }
+  
+  h2, h3, h4, h5, h6 {
+    color: #0b689b;
+    margin-bottom: 0.8em;
+  }
+  
+  a {
+    color: #1357bd;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: #166088;
+    text-decoration: underline;
+  }
+  
+  /* ==========================================================================
+     2. HEADER, FOOTER E STRUTTURE GENERALI
+     ========================================================================== */
   #app-wrapper {
     min-height: 100vh;
     display: flex;
@@ -47,100 +49,94 @@
   }
   
   main.content-area {
-    flex-grow: 1; /* Assicura che il contenuto principale spinga il footer in fondo */
+    flex-grow: 1;
     padding: 20px;
   }
   
-  
-  /* ------------------------------------
-     HEADER & NAVIGAZIONE (Bootstrap & App.vue)
-     ------------------------------------ */
   header.main-header {
-      background-color: var(--header-bg); 
-      color: #dbe9ee; 
-      text-align: center;
-      border-bottom: 4px solid var(--header-border);
-      width: 100%;
+    background-color: var(--header-bg);
+    color: #dbe9ee;
+    text-align: center;
+    border-bottom: 4px solid var(--header-border);
+    width: 100%;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
   }
   
-  /* Stili del Footer */
   footer {
-      /* Mantengo la tua definizione originale del footer */
-      background-color: #166088; 
-      color: #dbe9ee; /* Ho corretto il colore del testo che era nero (0f0f0f) su sfondo scuro */
-      text-align: center;
-      padding: 20px 0;
-      font-size: 0.9em;
-      margin-top: 0; /* Rimosso margin-top: auto; perché 'main' gestisce flex-grow: 1 */
-      margin-bottom: 0; /* Rimosso margin-bottom: auto; */
+    background-color: #166088;
+    color: #dbe9ee;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.9em;
+    margin-top: 0;
+    margin-bottom: 0;
   }
   
-  
-  /* --- Bootstrap Navbar Customization --- */
+  /* ==========================================================================
+     3. NAVIGAZIONE E MENU HAMBURGER
+     ========================================================================== */
   #main-navbar .navbar-nav .nav-link {
-      color: #ffffff;
-      font-weight: bold;
-      padding-left: 1rem;
-      padding-right: 1rem;
+    color: #ffffff;
+    font-weight: bold;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
   
   #main-navbar .navbar-nav .nav-link:hover,
   #main-navbar .navbar-nav .nav-link.active {
-      color: #ffffff;
-      background-color: rgba(74, 111, 165, 0.5);
-      border-radius: 4px;
+    color: #ffffff;
+    background-color: rgba(74, 111, 165, 0.5);
+    border-radius: 4px;
   }
   
   #main-navbar .navbar-brand {
-       color: #dbe9ee;
-       font-size: 1.5rem;
-       font-weight: bold;
-  }
-  #main-navbar .navbar-brand:hover {
-       color: #ffffff;
+    color: #dbe9ee;
+    font-size: 1.5rem;
+    font-weight: bold;
   }
   
-  /* ------------------------------------
-     HAMBURGER MENU (Logica Responsive da App.vue)
-     ------------------------------------ */
-  
-  /* 1. Stili Desktop (Nascondi Hamburger Menu e mostra Nav orizzontale) */
-  .main-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 30px;
-  }
-  
-  nav ul {
-    list-style: none;
-    display: flex; /* Mostra i link in orizzontale */
-    margin: 0;
-    padding: 0;
-  }
-  nav li {
-    margin-left: 20px;
-  }
-  /* Nascondi il pulsante hamburger di default */
-  .hamburger-btn {
-    display: none; 
-  }
-  
-  
-  /* ------------------------------------
-     STILI MOBILE (Media Query <= 768px)
-     ------------------------------------ */
-  @media (max-width: 768px) {
-    
-    /* 1. Pulizia della navbar orizzontale su mobile */
+  /* per la navigazione desktop */
+  @media (min-width: 769px) {
     .main-header {
-        justify-content: flex-start;
-        padding: 0;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 15px 30px;
     }
-    
-    /* 2. Pannello di Navigazione Mobile (Scompare/Appare) */
+    nav ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+    nav li {
+      margin-left: 20px;
+    }
+    .main-header nav ul li a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .main-header nav ul li a:hover {
+      color: #f0f0f0;
+      opacity: 0.8;
+    }
+    .hamburger-btn {
+      display: none;
+    }
+  }
+  
+  /* Menù Hamburger mobile*/
+  @media (max-width: 768px) {
+    .main-header {
+      justify-content: flex-start;
+      padding: 0;
+    }
     nav {
-      display: block; 
+      display: block;
       position: fixed;
       top: 0;
       right: 0;
@@ -150,32 +146,37 @@
       background-color: white;
       padding-top: 80px;
       box-shadow: -2px 0 5px rgba(0,0,0,0.2);
-      
-      /* Stato INIZIALE: Nascosto fuori dallo schermo */
-      transform: translateX(300px); 
+      transform: translateX(300px);
       transition: transform var(--transition-speed) ease-in-out;
       z-index: 1000;
     }
-    
-    /* Stato APERTO: Torna a 0 */
     nav.menu-open {
       transform: translateX(0);
     }
-  
     nav ul {
-      flex-direction: column; /* Impila i link in verticale */
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
     }
     nav li {
       margin-left: 0;
       border-bottom: 1px solid #eee;
     }
     nav a {
+      display: block;
       padding: 15px 20px;
     }
-  
-    /* 3. Bottone Hamburger (Mostrato solo su Mobile) */
+    nav.menu-open ul li a {
+      color: #0b689b;
+      font-size: 1.2rem;
+    }
+    nav.menu-open ul li a.router-link-active {
+      color: #000000;
+      font-weight: bold;
+    }
     .hamburger-btn {
-      display: block; 
+      display: block;
       position: fixed;
       top: 20px;
       right: 20px;
@@ -184,9 +185,8 @@
       background: none;
       border: none;
       cursor: pointer;
-      z-index: 1001; 
+      z-index: 1001;
     }
-  
     .line {
       display: block;
       width: 100%;
@@ -195,714 +195,195 @@
       background-color: var(--primary-color);
       transition: transform var(--transition-speed), opacity var(--transition-speed);
     }
-    
-    /* Animazione 'X': I selettori per le classi open */
-    .line.open:nth-child(1) { 
-      transform: translateY(10px) rotate(45deg); 
-    }
-    .line.open:nth-child(2) { 
-      opacity: 0; 
-    }
-    .line.open:nth-child(3) { 
-      transform: translateY(-10px) rotate(-45deg); 
-    }
+    .line.open:nth-child(1) { transform: translateY(10px) rotate(45deg); }
+    .line.open:nth-child(2) { opacity: 0; }
+    .line.open:nth-child(3) { transform: translateY(-10px) rotate(-45deg); }
   }
   
-  /* ------------------------------------
-     Sezione Login & Contatti Form
-     ------------------------------------ */
-  #login-section, #contatti-section {
-      background-color: #dbe9ee;
-      padding: 30px;
-      margin-top: 40px;
-      border-radius: 8px;
-      border: 1px solid #c0d6df;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  /* ==========================================================================
+     4. BOTTONI, FORM, TABELLE
+     ========================================================================== */
+
+  .btn-custom, .btn-invia {
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: auto;
+  }
+  .btn-invia { width: 100%; background-color: #3498db; }
+  .btn-custom:hover { background-color: #0b5ed7; }
+  
+  .btn-dettagli, .btn-edit {
+    display: inline-block;
+    text-align: center;
+    background-color: #0f739d;
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+  }
+  .btn-edit { background-color: #007bff; padding: 10px 20px; }
+  .btn-dettagli:hover { background-color: #0a5a7d; }
+  
+  .btn-logout, .btn-logout-scelta {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  .btn-logout-scelta { padding: 12px 25px; border-radius: 8px; font-weight: bold; background-color: #dc3545; }
+  
+  .btn-prenota {
+    display: inline-block;
+    background-color: #27ae60;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
   }
   
-  .form-label {
-      color: #166088;
-      font-weight: bold;
-      margin-bottom: 0.3rem;
+  .btn-login-prompt, .btn-login-required {
+    display: inline-block;
+    background-color: #34495e;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 0.9em;
+    font-weight: bold;
+    border: 1px dashed #fff;
   }
   
-  .form-control {
-      border: 1px solid #c0d6df;
-      font-size: 1em;
-  }
-  .form-control:focus {
-      border-color: #4a6fa5;
-      box-shadow: 0 0 0 0.25rem rgba(74, 111, 165, 0.25);
-  }
+  /* Form e Tabelle Generali */
+  .form-label { color: #166088; font-weight: bold; margin-bottom: 0.3rem; }
+  .form-control { border: 1px solid #c0d6df; font-size: 1em; }
+  .form-control:focus { border-color: #4a6fa5; box-shadow: 0 0 0 0.25rem rgba(74, 111, 165, 0.25); }
   
-  .btn-custom {
-      background-color: #0d6efd;
-      color: white;
-      border: none;
-      padding: 12px 25px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-  }
-  
-  .btn-custom:hover {
-      background-color: #0b5ed7;
-  }
-  
-  .attivo {
-      color: #0d6efd;
-      background-color: #166088;
-      padding: 5px;
-      border-radius: 4px;
-  }
-  
-  /* ------------------------------------
-     Tabella 
-     ------------------------------------ */
   table {
-      width: 80%;
-      margin: 20px auto;
-      border-collapse: collapse;
-      font-family: Arial, sans-serif;
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
   }
-  th, td {
-      border: 1px solid #c0d6df;
-      padding: 8px;
-      text-align: left;
-  }
-  th {
-      background-color: #dbe9ee;
-      color: #166088;
-  }
-  tr:nth-child(even) {
-      background-color: #f0f7fa;
-  }
-  tr:hover {
-      background-color: #e1edf2;
-  }
-  caption {
-      font-weight: bold;
-      margin-bottom: 10px;
-      color: #166088;
-  }
-
-.hotel-presentation {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-/* Contenitore principale della Navbar */
-.main-header {
-  display: flex;
-  flex-direction: column; /* Dispone gli elementi in verticale */
-  align-items: center;    /* Centra orizzontalmente */
-  justify-content: center;
-  padding: 20px 0;        /* Aggiunge spazio sopra e sotto */
-}
-
-/* Contenitore di Titolo + Immagine */
-.header-brand {
-  display: flex;
-  flex-direction: column; /* Mette l'immagine sotto il testo (o viceversa) */
-  align-items: center;    /* Centra entrambi */
-  gap: 15px;              /* Spazio tra testo e immagine */
-}
-
-/* Stile del Titolo */
-.header-brand h1 {
-  font-size: 3rem;        /* Font molto più grosso (regola a piacere) */
-  font-weight: bold;
-  margin: 0;
-  color: var(--color-text-light); /* Assicurati che sia bianco su azzurro */
-  text-align: center;
-}
-
-/* Stile dell'Immagine */
-/* Stile dell'Immagine nell'Header */
-.nav-logo {
-  /* Aumenta questo valore per ingrandirla ulteriormente */
-  height: 250px;          /* Prima era 120px, ora è molto più grande */
-  width: auto;            /* Mantiene le proporzioni corrette */
+  th, td { border: 1px solid #c0d6df; padding: 12px; text-align: left; }
+  th { background-color: #f4f4f4; color: #166088; font-weight: bold; }
+  tr:nth-child(even) { background-color: #f0f7fa; }
+  tr:hover { background-color: #e1edf2; }
   
-  border-radius: 12px;    /* Arrotonda leggermente di più gli angoli per estetica */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Aggiunge un'ombra per farla risaltare */
-  object-fit: cover;
+  /* ==========================================================================
+     5. COMPONENTI SPECIFICI 
+     ========================================================================== */
   
-  transition: transform 0.3s ease; /* Effetto fluido se vuoi aggiungere interazioni */
-}
-
-/* Se vuoi che su schermi piccoli (mobile) non sia gigante, 
- aggiungi questa regola per la responsività */
-@media (max-width: 768px) {
-  .nav-logo {
-      height: 150px;      /* Si rimpicciolisce automaticamente sui cellulari */
+  /* Header */
+  .header-brand { display: flex; flex-direction: column; align-items: center; gap: 15px; }
+  .header-brand h1 { font-size: 3rem; font-weight: bold; margin: 0; color: var(--color-text-light); text-align: center; }
+  .nav-logo { height: 250px; width: auto; border-radius: 12px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); object-fit: cover; }
+  @media (max-width: 768px) { .nav-logo { height: 150px; } }
+  
+  /* User Pill */
+  .user-pill {
+    position: absolute;
+    top: 15px;
+    right: 80px;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 5px 12px;
+    border-radius: 50px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+    z-index: 10;
   }
-}
-
-/* 1. LINK NELLA NAVBAR DESKTOP (Sempre bianchi) */
-.main-header nav ul li a {
-  color: #ffffff; 
-  text-decoration: none;
-  font-weight: 500;
-}
-
-/* 2. LINK NEL MENU HAMBURGER (Versione Mobile) */
-/* Quando il menu ha la classe .menu-open, cambiamo il colore dei link */
-nav.menu-open ul li a {
-  color: var(--color-primary); /* Usa l'azzurro scuro del tuo tema invece del bianco */
-  font-size: 1.2rem;          /* Magari un po' più grandi per il touch */
-}
-
-/* 3. COLORE LINK ATTIVO NEL MENU MOBILE */
-/* Per evidenziare in quale pagina si trova l'utente nel menu mobile */
-nav.menu-open ul li a.router-link-active {
-  color: #000000;             /* Nero o un colore contrastante per la pagina attiva */
-  font-weight: bold;
-}
-
-/* 4. HOVER (Solo per desktop) */
-@media (min-width: 769px) {
-  .main-header nav ul li a:hover {
-      color: #f0f0f0;
-      opacity: 0.8;
-  }
-}
-
-.login-form ul {
-  list-style-type: none; /* Rimuove i pallini neri */
-  padding: 0;
-}
-
-.login-form li {
-  margin-bottom: 15px; /* Spazia i campi del form */
-}
-
-.btn-invia {
-  padding: 10px 20px;
-  background-color: #0f739d;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-/*Prenotazioni */
-  .area-container { max-width: 800px; margin: 40px auto; padding: 20px; text-align: center; }
-  .card-prenotazione {
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+  .user-avatar { width: 28px; height: 28px; background-color: #007bff; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.8em; margin-right: 8px; }
+  .user-text { display: flex; flex-direction: column; line-height: 1.1; }
+  .pill-name { font-size: 0.85em; font-weight: 600; color: #333; }
+  .pill-role { font-size: 0.65em; color: #666; text-transform: uppercase; letter-spacing: 0.5px; }
+  
+  /* Griglia Camere */
+  .camere-container, .lista-camere, .hotel-page {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
     padding: 20px;
-    margin-bottom: 15px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .camera-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  .camera-card:hover { transform: translateY(-8px); box-shadow: 0 12px 25px rgba(0,0,0,0.15); }
+  .camera-img { width: 100%; height: 200px; object-fit: cover; border-bottom: 3px solid #0f739d; }
+  .camera-info { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; text-align: left; }
+  .price { font-size: 1.1rem; margin-top: auto; padding-bottom: 15px; color: #2c3e50; }
+  .price strong { color: #0f739d; font-size: 1.4rem; }
+  
+  /* Dashboard & Prenotazioni */
+  .welcome-banner {
+    background-color: #f0f4f8;
+    padding: 15px;
+    margin-bottom: 30px;
+    border-radius: 8px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    border-left: 5px solid #3498db;
   }
-  .badge { background: #e8f5e9; color: #2e7d32; padding: 4px 8px; border-radius: 4px; font-size: 0.9em; }
-  .btn-dettagli { background: #0f739d; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; }
-  .btn-logout { margin-top: 40px; background: none; border: 1px solid #ccc; padding: 10px 20px; cursor: pointer; }
-
-
-/* Camere*/
-/* Griglia principale */
-.camere-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* La singola Card della camera */
-.camera-card {
-  background: white;
-  border-radius: 12px;
-  overflow: hidden; /* Taglia l'immagine se esce dai bordi arrotondati */
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: flex;
-  flex-direction: column;
-}
-
-.camera-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
-}
-
-/* Immagine della camera */
-.camera-img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover; /* Mantiene le proporzioni dell'immagine senza schiacciarla */
-  border-bottom: 3px solid #0f739d; /* Richiamo all'azzurro hotel */
-}
-
-/* Testi della camera */
-.camera-info {
-  padding: 20px;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.camera-info h3 {
-  margin: 0 0 10px 0;
-  color: #333;
-  font-size: 1.5rem;
-}
-
-.camera-info p {
-  color: #666;
-  font-size: 0.95rem;
-  line-height: 1.4;
-  margin-bottom: 15px;
-}
-
-.price {
-  font-size: 1.1rem;
-  margin-top: auto; /* Spinge il prezzo sempre in fondo alla card */
-  padding-bottom: 15px;
-}
-
-.price strong {
-  color: #0f739d;
-  font-size: 1.4rem;
-}
-
-/* Pulsante di prenotazione */
-.btn-dettagli {
-  display: block;
-  text-align: center;
-  background-color: #0f739d;
-  color: white;
-  text-decoration: none;
-  padding: 12px;
-  border-radius: 6px;
-  font-weight: bold;
-  transition: background 0.3s;
-}
-
-.btn-dettagli:hover {
-  background-color: #0a5a7d;
-}
-
-/* Dashboard Utente */
-  .welcome-banner {
-      background-color: #f0f4f8;
-      padding: 15px;
-      margin-bottom: 20px;
-      border-radius: 8px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-left: 5px solid #3498db;
+  .prenotazioni-container { padding: 20px; max-width: 1100px; margin: 0 auto; }
+  .tabella-prenotazioni table { width: 100%; margin-top: 20px; }
+  .btn-delete { background-color: #ff4d4d; color: white; border: none; padding: 6px 12px; cursor: pointer; border-radius: 4px; }
+  .btn-delete:hover { background-color: #cc0000; }
+  
+  /* ==========================================================================
+     6. SEZIONI SPECIFICHE (LOGIN, RECENSIONI, CALENDARIO)
+     ========================================================================== */
+  #login-section, #contatti-section, .login-container {
+    background-color: #dbe9ee;
+    padding: 30px;
+    margin: 40px auto;
+    border-radius: 8px;
+    border: 1px solid #c0d6df;
+    max-width: 500px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
   }
-  .btn-logout {
-      background-color: #e74c3c;
-      color: white;
-      border: none;
-      padding: 5px 15px;
-      border-radius: 4px;
-      cursor: pointer;
-  }
-
-/* Login utente */
-error-message {
-  color: #e74c3c;
-  font-weight: bold;
-  margin-top: 15px;
-  background-color: #fceae9;
-  padding: 10px;
-  border-radius: 4px;
-}
-.login-container { text-align: center; padding: 50px; }
-.login-form { max-width: 350px; margin: 0 auto; }
-.field { margin-bottom: 20px; display: flex; flex-direction: column; text-align: left; }
-.btn-invia { width: 100%; padding: 10px; background-color: #3498db; color: white; border: none; cursor: pointer; }
-
-/* Stili per una visualizzazione chiara e professionale delle camere */
-.hotel-page { padding: 20px; max-width: 1200px; margin: 0 auto; }
-.welcome-banner { background: #f0f2f5; padding: 15px; border-radius: 8px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; }
-.camere-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-.camera-card { border: 1px solid #ddd; border-radius: 10px; overflow: hidden; background: white; transition: transform 0.2s; }
-.camera-card:hover { transform: translateY(-5px); }
-.camera-img { width: 100%; height: 200px; object-fit: cover; }
-.camera-info { padding: 15px; text-align: left; }
-.price { color: #2c3e50; font-size: 1.1rem; }
-
-/* Colori distintivi per le azioni */
-.btn-prenota { background-color: #27ae60; color: white; padding: 10px 15px; border-radius: 5px; text-decoration: none; display: inline-block; margin-top: 10px; }
-.btn-modifica { background-color: #f39c12; color: white; padding: 10px 15px; border-radius: 5px; text-decoration: none; display: inline-block; margin-top: 10px; }
-.btn-login-required { background-color: #34495e; color: white; padding: 10px 15px; border-radius: 5px; text-decoration: none; display: inline-block; margin-top: 10px; }
-.btn-logout { background: #e74c3c; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; }
-
-  /* Stili Recensioni */
-  .reviews-section { text-align: center; }
+  .login-form ul { list-style-type: none; padding: 0; }
+  .login-form li { margin-bottom: 15px; }
+  
+  /* Recensioni */
   .reviews-grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 30px; }
   .review-card { background: #fff; border: 1px solid #ddd; padding: 20px; border-radius: 12px; width: 320px; text-align: left; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
   .reviewer-stars { color: #f1c40f; margin: 10px 0; }
-  .write-review-area { background: #f9f9f9; padding: 30px; border-radius: 15px; margin-top: 50px; max-width: 700px; margin-left: auto; margin-right: auto; }
-  textarea { width: 100%; height: 100px; padding: 15px; border-radius: 8px; border: 1px solid #ccc; margin-bottom: 15px; resize: none; }
-  .btn-submit { background: #2c3e50; color: white; padding: 12px 25px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
-  .review-notice { margin-top: 30px; color: #888; font-style: italic; }
-
-
-  /* Stile per la pagina Hotel */
-.hotel-container {
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.lista-camere {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-  margin-top: 20px;
-}
-
-.camera-card {
-  border: 1px solid #ddd;
-  padding: 20px;
-  border-radius: 12px;
-  background-color: #fff;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.camera-card h3 {
-  margin: 0;
-  color: #333;
-}
-
-/* Pulsanti dinamici */
-.btn-prenota {
-  display: inline-block;
-  background-color: #28a745; /* Verde */
-  color: white;
-  padding: 10px 20px;
-  text-decoration: none;
-  border-radius: 6px;
-  text-align: center;
-  font-weight: bold;
-}
-
-.btn-edit {
-  display: inline-block;
-  background-color: #007bff; /* Blu */
-  color: white;
-  padding: 10px 20px;
-  text-decoration: none;
-  border-radius: 6px;
-  text-align: center;
-  font-weight: bold;
-}
-
-.btn-prenota:hover, .btn-edit:hover {
-  opacity: 0.9;
-}
-
-.btn-login-prompt {
-  display: inline-block;
-  background-color: #6c757d; /* Grigio scuro per distinguerlo dai tasti azione */
-  color: white;
-  padding: 10px 20px;
-  text-decoration: none;
-  border-radius: 6px;
-  text-align: center;
-  font-size: 0.9em;
-  font-weight: bold;
-  border: 1px dashed #fff;
-}
-
-.btn-login-prompt:hover {
-  background-color: #5a6268;
-  text-decoration: underline;
-}
-
-/* Stile della User Pill */
-.user-pill {
-  position: absolute;
-  top: 15px;
-  right: 80px; /* Distanziata dal tasto hamburger */
-  display: flex;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 5px 12px;
-  border-radius: 50px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e0e0e0;
-  z-index: 10;
-}
-
-/* Icona rotonda con l'iniziale */
-.user-avatar {
-  width: 28px;
-  height: 28px;
-  background-color: #007bff; /* Colore blu hotel */
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 0.8em;
-  margin-right: 8px;
-}
-
-.user-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.1;
-}
-
-.pill-name {
-  font-size: 0.85em;
-  font-weight: 600;
-  color: #333;
-}
-
-.pill-role {
-  font-size: 0.65em;
-  color: #666;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-/* Nascondi la pillola su schermi molto piccoli se disturba */
-@media (max-width: 480px) {
-  .user-pill {
-    right: 70px;
-    padding: 4px 8px;
-  }
-  .pill-role { display: none; } /* Mostra solo il nome su mobile */
-}
-
-/* Container della scelta accesso */
-.scelta-container {
-  max-width: 900px;
-  margin: 60px auto;
-  padding: 20px;
-  text-align: center;
-}
-
-/* Griglia delle Card per la scelta */
-.cards-wrapper {
-  display: flex;
-  gap: 30px;
-  justify-content: center;
-  margin-top: 40px;
-}
-
-.access-card {
-  flex: 1;
-  max-width: 350px;
-  padding: 40px 20px;
-  border: 1px solid #e0e0e0;
-  border-radius: 15px;
-  text-decoration: none;
-  color: #333;
-  background: white;
-  transition: transform 0.3s, box-shadow 0.3s;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-}
-
-.access-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-
-.card-icon {
-  font-size: 3rem;
-  margin-bottom: 20px;
-}
-
-/* Box Utente Già Loggato */
-.already-logged-box {
-  background: white;
-  padding: 50px;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-  border: 1px solid #28a745;
-}
-
-.status-icon-big {
-  font-size: 4rem;
-  margin-bottom: 20px;
-}
-
-.scelta-actions {
-  margin-top: 30px;
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-}
-
-/* Pulsanti */
-.btn-logout-scelta {
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  padding: 12px 25px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.btn-continue {
-  display: inline-block;
-  text-decoration: none;
-  background-color: #007bff;
-  color: white;
-  padding: 12px 25px;
-  border-radius: 8px;
-  font-weight: bold;
-}
-
-/* Container Calendario */
-.calendar-wrapper {
-  max-width: 400px;
-  background: white;
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-  margin-bottom: 30px;
-}
-
-.calendar-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-/* La Griglia a 7 colonne */
-.calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 5px;
-  text-align: center;
-}
-
-.day-name {
-  font-weight: bold;
-  font-size: 0.8em;
-  color: #888;
-  padding-bottom: 10px;
-}
-
-/* Il quadratino del giorno */
-.day-square {
-  aspect-ratio: 1 / 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border-radius: 8px;
-  font-size: 0.9em;
-  transition: 0.2s;
-  border: 1px solid #f0f0f0;
-}
-
-.day-square:hover:not(.disabled) {
-  background-color: #e3f2fd;
-}
-
-.day-square.disabled {
-  color: #ccc;
-  cursor: not-allowed;
-  background: #f9f9f9;
-}
-
-/* Colori della selezione */
-.day-square.selected {
-  background-color: #007bff !important;
-  color: white;
-  font-weight: bold;
-}
-
-.day-square.in-range {
-  background-color: #d1e7ff;
-}
-
-.day-square.today {
-  border: 2px solid #007bff;
-}
-
-.booking-summary {
-  background: #f8f9fa;
-  padding: 20px;
-  border-radius: 12px;
-}
-
-/*prenotazioni*/
-.prenotazioni-container {
-  padding: 20px;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-.tabella-prenotazioni table {
-  width: 100%;
-  border-collapse: collapse;
-}
-.tabella-prenotazioni th, .tabella-prenotazioni td {
-  padding: 12px;
-  border: 1px solid #ddd;
-  text-align: left;
-}
-.btn-delete {
-  background-color: #ff4d4d;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-.no-data {
-  text-align: center;
-  margin-top: 50px;
-}
-
-
-/* Stili per evidenziare la colonna utente */
-th {
-  background-color: #f4f4f4;
-  font-weight: bold;
-}
-td strong {
-  color: #007bff;
-}
-.prenotazioni-container {
-  padding: 20px;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-.tabella-prenotazioni table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-.tabella-prenotazioni th, .tabella-prenotazioni td {
-  padding: 12px;
-  border: 1px solid #ddd;
-  text-align: left;
-}
-.btn-delete {
-  background-color: #ff4d4d;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-.btn-delete:hover {
-  background-color: #cc0000;
-}
+  
+  /* Calendario */
+  .calendar-wrapper { max-width: 400px; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); margin-bottom: 30px; }
+  .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center; }
+  .day-square { aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 8px; border: 1px solid #f0f0f0; }
+  .day-square.selected { background-color: #007bff !important; color: white; }
+  .day-square.in-range { background-color: #d1e7ff; }
+  
+  /* Accesso Scelta */
+  .scelta-container { max-width: 900px; margin: 60px auto; text-align: center; }
+  .cards-wrapper { display: flex; gap: 30px; justify-content: center; margin-top: 40px; }
+  .access-card { flex: 1; max-width: 350px; padding: 40px 20px; border: 1px solid #e0e0e0; border-radius: 15px; background: white; transition: 0.3s; }
+  .access-card:hover { transform: translateY(-10px); }

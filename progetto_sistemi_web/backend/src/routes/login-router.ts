@@ -11,7 +11,6 @@ router.post("/login", (req: Request, res: Response) => {
     db.query(query, [username, password, ruolo], (err, results: any) => {
         if (err) return res.status(500).json({ success: false });
 
-        // IMPORTANTE: results.length deve essere maggiore di 0
         if (results && results.length > 0) {
             res.json({ success: true, user: results[0] });
         } else {
